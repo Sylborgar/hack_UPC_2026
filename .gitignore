@@ -8,3 +8,5 @@ __pycache__/
 *.tmp
 *.env
 .env.*
+
+test_env
