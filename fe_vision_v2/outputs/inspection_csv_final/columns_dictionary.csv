@@ -1,0 +1,234 @@
+column,dtype,group,description,is_embedding,embedding_family,embedding_index,non_null_count,missing_count,missing_pct,unique_count,memory_mb
+copy_length_chars,int64,copy_video,Longitud del copy en caracteres.,False,,,1080,0,0.0,89,0.00823974609375
+duration_sec,int64,copy_video,Duracion del asset en segundos.,False,,,1080,0,0.0,9,0.00823974609375
+readability_score,float64,copy_video,Score de legibilidad del texto.,False,,,1080,0,0.0,368,0.00823974609375
+text_density,float64,copy_video,Densidad de texto dentro de la creatividad.,False,,,1080,0,0.0,548,0.00823974609375
+brand_visibility_score,float64,creative_attributes,Visibilidad de marca estimada.,False,,,1080,0,0.0,517,0.00823974609375
+clutter_score,float64,creative_attributes,Nivel de saturacion visual.,False,,,1080,0,0.0,482,0.00823974609375
+faces_count,int64,creative_attributes,Numero de caras detectadas.,False,,,1080,0,0.0,5,0.00823974609375
+has_discount_badge,int64,creative_attributes,Flag binario: muestra badge de descuento.,False,,,1080,0,0.0,2,0.00823974609375
+has_gameplay,int64,creative_attributes,Flag binario: incluye gameplay.,False,,,1080,0,0.0,2,0.00823974609375
+has_price,int64,creative_attributes,Flag binario: muestra precio.,False,,,1080,0,0.0,2,0.00823974609375
+has_ugc_style,int64,creative_attributes,Flag binario: estilo UGC.,False,,,1080,0,0.0,2,0.00823974609375
+motion_score,float64,creative_attributes,Score de movimiento visual.,False,,,1080,0,0.0,585,0.00823974609375
+novelty_score,float64,creative_attributes,Score de novedad percibida.,False,,,1080,0,0.0,577,0.00823974609375
+product_count,int64,creative_attributes,Numero de productos detectados.,False,,,1080,0,0.0,5,0.00823974609375
+aspect_ratio,float64,dimensiones,Relacion de aspecto del asset (ancho/alto).,False,,,1080,0,0.0,3,0.00823974609375
+height_x,int64,dimensiones,Alto original del creativo en pixeles (origen tabla base).,False,,,1080,0,0.0,3,0.00823974609375
+height_y,int64,dimensiones,Alto usado en el pipeline visual (post-join).,False,,,1080,0,0.0,3,0.00823974609375
+image_area,int64,dimensiones,Area de imagen en pixeles.,False,,,1080,0,0.0,3,0.00823974609375
+width_x,int64,dimensiones,Ancho original del creativo en pixeles (origen tabla base).,False,,,1080,0,0.0,2,0.00823974609375
+width_y,int64,dimensiones,Ancho usado en el pipeline visual (post-join).,False,,,1080,0,0.0,2,0.00823974609375
+clip_pca_0,float64,embeddings_pca,Componente PCA 0 del embedding CLIP.,True,clip_pca,0,1080,0,0.0,1056,0.00823974609375
+clip_pca_1,float64,embeddings_pca,Componente PCA 1 del embedding CLIP.,True,clip_pca,1,1080,0,0.0,1056,0.00823974609375
+clip_pca_10,float64,embeddings_pca,Componente PCA 10 del embedding CLIP.,True,clip_pca,10,1080,0,0.0,1058,0.00823974609375
+clip_pca_11,float64,embeddings_pca,Componente PCA 11 del embedding CLIP.,True,clip_pca,11,1080,0,0.0,1059,0.00823974609375
+clip_pca_12,float64,embeddings_pca,Componente PCA 12 del embedding CLIP.,True,clip_pca,12,1080,0,0.0,1060,0.00823974609375
+clip_pca_13,float64,embeddings_pca,Componente PCA 13 del embedding CLIP.,True,clip_pca,13,1080,0,0.0,1060,0.00823974609375
+clip_pca_14,float64,embeddings_pca,Componente PCA 14 del embedding CLIP.,True,clip_pca,14,1080,0,0.0,1059,0.00823974609375
+clip_pca_15,float64,embeddings_pca,Componente PCA 15 del embedding CLIP.,True,clip_pca,15,1080,0,0.0,1059,0.00823974609375
+clip_pca_16,float64,embeddings_pca,Componente PCA 16 del embedding CLIP.,True,clip_pca,16,1080,0,0.0,1062,0.00823974609375
+clip_pca_17,float64,embeddings_pca,Componente PCA 17 del embedding CLIP.,True,clip_pca,17,1080,0,0.0,1060,0.00823974609375
+clip_pca_18,float64,embeddings_pca,Componente PCA 18 del embedding CLIP.,True,clip_pca,18,1080,0,0.0,1062,0.00823974609375
+clip_pca_19,float64,embeddings_pca,Componente PCA 19 del embedding CLIP.,True,clip_pca,19,1080,0,0.0,1061,0.00823974609375
+clip_pca_2,float64,embeddings_pca,Componente PCA 2 del embedding CLIP.,True,clip_pca,2,1080,0,0.0,1059,0.00823974609375
+clip_pca_20,float64,embeddings_pca,Componente PCA 20 del embedding CLIP.,True,clip_pca,20,1080,0,0.0,1059,0.00823974609375
+clip_pca_21,float64,embeddings_pca,Componente PCA 21 del embedding CLIP.,True,clip_pca,21,1080,0,0.0,1060,0.00823974609375
+clip_pca_22,float64,embeddings_pca,Componente PCA 22 del embedding CLIP.,True,clip_pca,22,1080,0,0.0,1061,0.00823974609375
+clip_pca_23,float64,embeddings_pca,Componente PCA 23 del embedding CLIP.,True,clip_pca,23,1080,0,0.0,1060,0.00823974609375
+clip_pca_24,float64,embeddings_pca,Componente PCA 24 del embedding CLIP.,True,clip_pca,24,1080,0,0.0,1060,0.00823974609375
+clip_pca_25,float64,embeddings_pca,Componente PCA 25 del embedding CLIP.,True,clip_pca,25,1080,0,0.0,1062,0.00823974609375
+clip_pca_26,float64,embeddings_pca,Componente PCA 26 del embedding CLIP.,True,clip_pca,26,1080,0,0.0,1062,0.00823974609375
+clip_pca_27,float64,embeddings_pca,Componente PCA 27 del embedding CLIP.,True,clip_pca,27,1080,0,0.0,1061,0.00823974609375
+clip_pca_28,float64,embeddings_pca,Componente PCA 28 del embedding CLIP.,True,clip_pca,28,1080,0,0.0,1062,0.00823974609375
+clip_pca_29,float64,embeddings_pca,Componente PCA 29 del embedding CLIP.,True,clip_pca,29,1080,0,0.0,1060,0.00823974609375
+clip_pca_3,float64,embeddings_pca,Componente PCA 3 del embedding CLIP.,True,clip_pca,3,1080,0,0.0,1058,0.00823974609375
+clip_pca_30,float64,embeddings_pca,Componente PCA 30 del embedding CLIP.,True,clip_pca,30,1080,0,0.0,1062,0.00823974609375
+clip_pca_31,float64,embeddings_pca,Componente PCA 31 del embedding CLIP.,True,clip_pca,31,1080,0,0.0,1062,0.00823974609375
+clip_pca_32,float64,embeddings_pca,Componente PCA 32 del embedding CLIP.,True,clip_pca,32,1080,0,0.0,1063,0.00823974609375
+clip_pca_33,float64,embeddings_pca,Componente PCA 33 del embedding CLIP.,True,clip_pca,33,1080,0,0.0,1063,0.00823974609375
+clip_pca_34,float64,embeddings_pca,Componente PCA 34 del embedding CLIP.,True,clip_pca,34,1080,0,0.0,1062,0.00823974609375
+clip_pca_35,float64,embeddings_pca,Componente PCA 35 del embedding CLIP.,True,clip_pca,35,1080,0,0.0,1062,0.00823974609375
+clip_pca_36,float64,embeddings_pca,Componente PCA 36 del embedding CLIP.,True,clip_pca,36,1080,0,0.0,1062,0.00823974609375
+clip_pca_37,float64,embeddings_pca,Componente PCA 37 del embedding CLIP.,True,clip_pca,37,1080,0,0.0,1061,0.00823974609375
+clip_pca_38,float64,embeddings_pca,Componente PCA 38 del embedding CLIP.,True,clip_pca,38,1080,0,0.0,1059,0.00823974609375
+clip_pca_39,float64,embeddings_pca,Componente PCA 39 del embedding CLIP.,True,clip_pca,39,1080,0,0.0,1062,0.00823974609375
+clip_pca_4,float64,embeddings_pca,Componente PCA 4 del embedding CLIP.,True,clip_pca,4,1080,0,0.0,1059,0.00823974609375
+clip_pca_40,float64,embeddings_pca,Componente PCA 40 del embedding CLIP.,True,clip_pca,40,1080,0,0.0,1064,0.00823974609375
+clip_pca_41,float64,embeddings_pca,Componente PCA 41 del embedding CLIP.,True,clip_pca,41,1080,0,0.0,1063,0.00823974609375
+clip_pca_42,float64,embeddings_pca,Componente PCA 42 del embedding CLIP.,True,clip_pca,42,1080,0,0.0,1064,0.00823974609375
+clip_pca_43,float64,embeddings_pca,Componente PCA 43 del embedding CLIP.,True,clip_pca,43,1080,0,0.0,1064,0.00823974609375
+clip_pca_44,float64,embeddings_pca,Componente PCA 44 del embedding CLIP.,True,clip_pca,44,1080,0,0.0,1065,0.00823974609375
+clip_pca_45,float64,embeddings_pca,Componente PCA 45 del embedding CLIP.,True,clip_pca,45,1080,0,0.0,1065,0.00823974609375
+clip_pca_46,float64,embeddings_pca,Componente PCA 46 del embedding CLIP.,True,clip_pca,46,1080,0,0.0,1064,0.00823974609375
+clip_pca_47,float64,embeddings_pca,Componente PCA 47 del embedding CLIP.,True,clip_pca,47,1080,0,0.0,1065,0.00823974609375
+clip_pca_48,float64,embeddings_pca,Componente PCA 48 del embedding CLIP.,True,clip_pca,48,1080,0,0.0,1064,0.00823974609375
+clip_pca_49,float64,embeddings_pca,Componente PCA 49 del embedding CLIP.,True,clip_pca,49,1080,0,0.0,1065,0.00823974609375
+clip_pca_5,float64,embeddings_pca,Componente PCA 5 del embedding CLIP.,True,clip_pca,5,1080,0,0.0,1057,0.00823974609375
+clip_pca_50,float64,embeddings_pca,Componente PCA 50 del embedding CLIP.,True,clip_pca,50,1080,0,0.0,1065,0.00823974609375
+clip_pca_51,float64,embeddings_pca,Componente PCA 51 del embedding CLIP.,True,clip_pca,51,1080,0,0.0,1065,0.00823974609375
+clip_pca_52,float64,embeddings_pca,Componente PCA 52 del embedding CLIP.,True,clip_pca,52,1080,0,0.0,1065,0.00823974609375
+clip_pca_53,float64,embeddings_pca,Componente PCA 53 del embedding CLIP.,True,clip_pca,53,1080,0,0.0,1065,0.00823974609375
+clip_pca_54,float64,embeddings_pca,Componente PCA 54 del embedding CLIP.,True,clip_pca,54,1080,0,0.0,1065,0.00823974609375
+clip_pca_55,float64,embeddings_pca,Componente PCA 55 del embedding CLIP.,True,clip_pca,55,1080,0,0.0,1065,0.00823974609375
+clip_pca_56,float64,embeddings_pca,Componente PCA 56 del embedding CLIP.,True,clip_pca,56,1080,0,0.0,1065,0.00823974609375
+clip_pca_57,float64,embeddings_pca,Componente PCA 57 del embedding CLIP.,True,clip_pca,57,1080,0,0.0,1065,0.00823974609375
+clip_pca_58,float64,embeddings_pca,Componente PCA 58 del embedding CLIP.,True,clip_pca,58,1080,0,0.0,1065,0.00823974609375
+clip_pca_59,float64,embeddings_pca,Componente PCA 59 del embedding CLIP.,True,clip_pca,59,1080,0,0.0,1065,0.00823974609375
+clip_pca_6,float64,embeddings_pca,Componente PCA 6 del embedding CLIP.,True,clip_pca,6,1080,0,0.0,1059,0.00823974609375
+clip_pca_60,float64,embeddings_pca,Componente PCA 60 del embedding CLIP.,True,clip_pca,60,1080,0,0.0,1064,0.00823974609375
+clip_pca_61,float64,embeddings_pca,Componente PCA 61 del embedding CLIP.,True,clip_pca,61,1080,0,0.0,1065,0.00823974609375
+clip_pca_62,float64,embeddings_pca,Componente PCA 62 del embedding CLIP.,True,clip_pca,62,1080,0,0.0,1065,0.00823974609375
+clip_pca_63,float64,embeddings_pca,Componente PCA 63 del embedding CLIP.,True,clip_pca,63,1080,0,0.0,1065,0.00823974609375
+clip_pca_7,float64,embeddings_pca,Componente PCA 7 del embedding CLIP.,True,clip_pca,7,1080,0,0.0,1061,0.00823974609375
+clip_pca_8,float64,embeddings_pca,Componente PCA 8 del embedding CLIP.,True,clip_pca,8,1080,0,0.0,1059,0.00823974609375
+clip_pca_9,float64,embeddings_pca,Componente PCA 9 del embedding CLIP.,True,clip_pca,9,1080,0,0.0,1058,0.00823974609375
+cnn_pca_0,float64,embeddings_pca,Componente PCA 0 del embedding CNN.,True,cnn_pca,0,1080,0,0.0,1079,0.00823974609375
+cnn_pca_1,float64,embeddings_pca,Componente PCA 1 del embedding CNN.,True,cnn_pca,1,1080,0,0.0,1079,0.00823974609375
+cnn_pca_10,float64,embeddings_pca,Componente PCA 10 del embedding CNN.,True,cnn_pca,10,1080,0,0.0,1079,0.00823974609375
+cnn_pca_11,float64,embeddings_pca,Componente PCA 11 del embedding CNN.,True,cnn_pca,11,1080,0,0.0,1079,0.00823974609375
+cnn_pca_12,float64,embeddings_pca,Componente PCA 12 del embedding CNN.,True,cnn_pca,12,1080,0,0.0,1079,0.00823974609375
+cnn_pca_13,float64,embeddings_pca,Componente PCA 13 del embedding CNN.,True,cnn_pca,13,1080,0,0.0,1080,0.00823974609375
+cnn_pca_14,float64,embeddings_pca,Componente PCA 14 del embedding CNN.,True,cnn_pca,14,1080,0,0.0,1080,0.00823974609375
+cnn_pca_15,float64,embeddings_pca,Componente PCA 15 del embedding CNN.,True,cnn_pca,15,1080,0,0.0,1080,0.00823974609375
+cnn_pca_16,float64,embeddings_pca,Componente PCA 16 del embedding CNN.,True,cnn_pca,16,1080,0,0.0,1080,0.00823974609375
+cnn_pca_17,float64,embeddings_pca,Componente PCA 17 del embedding CNN.,True,cnn_pca,17,1080,0,0.0,1080,0.00823974609375
+cnn_pca_18,float64,embeddings_pca,Componente PCA 18 del embedding CNN.,True,cnn_pca,18,1080,0,0.0,1080,0.00823974609375
+cnn_pca_19,float64,embeddings_pca,Componente PCA 19 del embedding CNN.,True,cnn_pca,19,1080,0,0.0,1080,0.00823974609375
+cnn_pca_2,float64,embeddings_pca,Componente PCA 2 del embedding CNN.,True,cnn_pca,2,1080,0,0.0,1079,0.00823974609375
+cnn_pca_20,float64,embeddings_pca,Componente PCA 20 del embedding CNN.,True,cnn_pca,20,1080,0,0.0,1080,0.00823974609375
+cnn_pca_21,float64,embeddings_pca,Componente PCA 21 del embedding CNN.,True,cnn_pca,21,1080,0,0.0,1080,0.00823974609375
+cnn_pca_22,float64,embeddings_pca,Componente PCA 22 del embedding CNN.,True,cnn_pca,22,1080,0,0.0,1080,0.00823974609375
+cnn_pca_23,float64,embeddings_pca,Componente PCA 23 del embedding CNN.,True,cnn_pca,23,1080,0,0.0,1080,0.00823974609375
+cnn_pca_24,float64,embeddings_pca,Componente PCA 24 del embedding CNN.,True,cnn_pca,24,1080,0,0.0,1080,0.00823974609375
+cnn_pca_25,float64,embeddings_pca,Componente PCA 25 del embedding CNN.,True,cnn_pca,25,1080,0,0.0,1080,0.00823974609375
+cnn_pca_26,float64,embeddings_pca,Componente PCA 26 del embedding CNN.,True,cnn_pca,26,1080,0,0.0,1080,0.00823974609375
+cnn_pca_27,float64,embeddings_pca,Componente PCA 27 del embedding CNN.,True,cnn_pca,27,1080,0,0.0,1080,0.00823974609375
+cnn_pca_28,float64,embeddings_pca,Componente PCA 28 del embedding CNN.,True,cnn_pca,28,1080,0,0.0,1080,0.00823974609375
+cnn_pca_29,float64,embeddings_pca,Componente PCA 29 del embedding CNN.,True,cnn_pca,29,1080,0,0.0,1080,0.00823974609375
+cnn_pca_3,float64,embeddings_pca,Componente PCA 3 del embedding CNN.,True,cnn_pca,3,1080,0,0.0,1079,0.00823974609375
+cnn_pca_30,float64,embeddings_pca,Componente PCA 30 del embedding CNN.,True,cnn_pca,30,1080,0,0.0,1080,0.00823974609375
+cnn_pca_31,float64,embeddings_pca,Componente PCA 31 del embedding CNN.,True,cnn_pca,31,1080,0,0.0,1080,0.00823974609375
+cnn_pca_32,float64,embeddings_pca,Componente PCA 32 del embedding CNN.,True,cnn_pca,32,1080,0,0.0,1080,0.00823974609375
+cnn_pca_33,float64,embeddings_pca,Componente PCA 33 del embedding CNN.,True,cnn_pca,33,1080,0,0.0,1080,0.00823974609375
+cnn_pca_34,float64,embeddings_pca,Componente PCA 34 del embedding CNN.,True,cnn_pca,34,1080,0,0.0,1080,0.00823974609375
+cnn_pca_35,float64,embeddings_pca,Componente PCA 35 del embedding CNN.,True,cnn_pca,35,1080,0,0.0,1080,0.00823974609375
+cnn_pca_36,float64,embeddings_pca,Componente PCA 36 del embedding CNN.,True,cnn_pca,36,1080,0,0.0,1080,0.00823974609375
+cnn_pca_37,float64,embeddings_pca,Componente PCA 37 del embedding CNN.,True,cnn_pca,37,1080,0,0.0,1080,0.00823974609375
+cnn_pca_38,float64,embeddings_pca,Componente PCA 38 del embedding CNN.,True,cnn_pca,38,1080,0,0.0,1080,0.00823974609375
+cnn_pca_39,float64,embeddings_pca,Componente PCA 39 del embedding CNN.,True,cnn_pca,39,1080,0,0.0,1080,0.00823974609375
+cnn_pca_4,float64,embeddings_pca,Componente PCA 4 del embedding CNN.,True,cnn_pca,4,1080,0,0.0,1079,0.00823974609375
+cnn_pca_40,float64,embeddings_pca,Componente PCA 40 del embedding CNN.,True,cnn_pca,40,1080,0,0.0,1080,0.00823974609375
+cnn_pca_41,float64,embeddings_pca,Componente PCA 41 del embedding CNN.,True,cnn_pca,41,1080,0,0.0,1080,0.00823974609375
+cnn_pca_42,float64,embeddings_pca,Componente PCA 42 del embedding CNN.,True,cnn_pca,42,1080,0,0.0,1080,0.00823974609375
+cnn_pca_43,float64,embeddings_pca,Componente PCA 43 del embedding CNN.,True,cnn_pca,43,1080,0,0.0,1080,0.00823974609375
+cnn_pca_44,float64,embeddings_pca,Componente PCA 44 del embedding CNN.,True,cnn_pca,44,1080,0,0.0,1080,0.00823974609375
+cnn_pca_45,float64,embeddings_pca,Componente PCA 45 del embedding CNN.,True,cnn_pca,45,1080,0,0.0,1080,0.00823974609375
+cnn_pca_46,float64,embeddings_pca,Componente PCA 46 del embedding CNN.,True,cnn_pca,46,1080,0,0.0,1079,0.00823974609375
+cnn_pca_47,float64,embeddings_pca,Componente PCA 47 del embedding CNN.,True,cnn_pca,47,1080,0,0.0,1080,0.00823974609375
+cnn_pca_48,float64,embeddings_pca,Componente PCA 48 del embedding CNN.,True,cnn_pca,48,1080,0,0.0,1080,0.00823974609375
+cnn_pca_49,float64,embeddings_pca,Componente PCA 49 del embedding CNN.,True,cnn_pca,49,1080,0,0.0,1080,0.00823974609375
+cnn_pca_5,float64,embeddings_pca,Componente PCA 5 del embedding CNN.,True,cnn_pca,5,1080,0,0.0,1079,0.00823974609375
+cnn_pca_50,float64,embeddings_pca,Componente PCA 50 del embedding CNN.,True,cnn_pca,50,1080,0,0.0,1080,0.00823974609375
+cnn_pca_51,float64,embeddings_pca,Componente PCA 51 del embedding CNN.,True,cnn_pca,51,1080,0,0.0,1080,0.00823974609375
+cnn_pca_52,float64,embeddings_pca,Componente PCA 52 del embedding CNN.,True,cnn_pca,52,1080,0,0.0,1080,0.00823974609375
+cnn_pca_53,float64,embeddings_pca,Componente PCA 53 del embedding CNN.,True,cnn_pca,53,1080,0,0.0,1080,0.00823974609375
+cnn_pca_54,float64,embeddings_pca,Componente PCA 54 del embedding CNN.,True,cnn_pca,54,1080,0,0.0,1080,0.00823974609375
+cnn_pca_55,float64,embeddings_pca,Componente PCA 55 del embedding CNN.,True,cnn_pca,55,1080,0,0.0,1080,0.00823974609375
+cnn_pca_56,float64,embeddings_pca,Componente PCA 56 del embedding CNN.,True,cnn_pca,56,1080,0,0.0,1080,0.00823974609375
+cnn_pca_57,float64,embeddings_pca,Componente PCA 57 del embedding CNN.,True,cnn_pca,57,1080,0,0.0,1080,0.00823974609375
+cnn_pca_58,float64,embeddings_pca,Componente PCA 58 del embedding CNN.,True,cnn_pca,58,1080,0,0.0,1080,0.00823974609375
+cnn_pca_59,float64,embeddings_pca,Componente PCA 59 del embedding CNN.,True,cnn_pca,59,1080,0,0.0,1080,0.00823974609375
+cnn_pca_6,float64,embeddings_pca,Componente PCA 6 del embedding CNN.,True,cnn_pca,6,1080,0,0.0,1079,0.00823974609375
+cnn_pca_60,float64,embeddings_pca,Componente PCA 60 del embedding CNN.,True,cnn_pca,60,1080,0,0.0,1080,0.00823974609375
+cnn_pca_61,float64,embeddings_pca,Componente PCA 61 del embedding CNN.,True,cnn_pca,61,1080,0,0.0,1080,0.00823974609375
+cnn_pca_62,float64,embeddings_pca,Componente PCA 62 del embedding CNN.,True,cnn_pca,62,1080,0,0.0,1080,0.00823974609375
+cnn_pca_63,float64,embeddings_pca,Componente PCA 63 del embedding CNN.,True,cnn_pca,63,1080,0,0.0,1080,0.00823974609375
+cnn_pca_7,float64,embeddings_pca,Componente PCA 7 del embedding CNN.,True,cnn_pca,7,1080,0,0.0,1079,0.00823974609375
+cnn_pca_8,float64,embeddings_pca,Componente PCA 8 del embedding CNN.,True,cnn_pca,8,1080,0,0.0,1079,0.00823974609375
+cnn_pca_9,float64,embeddings_pca,Componente PCA 9 del embedding CNN.,True,cnn_pca,9,1080,0,0.0,1079,0.00823974609375
+campaign_id,int64,identificadores,Identificador de la campana.,False,,,1080,0,0.0,180,0.00823974609375
+creative_id,int64,identificadores,Identificador unico del creativo.,False,,,1080,0,0.0,1080,0.00823974609375
+ctr_decay_pct,float64,kpis,Cambio porcentual del CTR entre inicio y final.,False,,,1080,0,0.0,1080,0.00823974609375
+cvr_decay_pct,float64,kpis,Cambio porcentual del CVR entre inicio y final.,False,,,1080,0,0.0,1080,0.00823974609375
+fatigue_day,float64,kpis,Dia estimado de fatiga del creativo.,False,,,199,881,81.57407407407408,8,0.00823974609375
+first_7d_clicks,int64,kpis,Clicks de los primeros 7 dias.,False,,,1080,0,0.0,1053,0.00823974609375
+first_7d_conversions,int64,kpis,Conversiones de los primeros 7 dias.,False,,,1080,0,0.0,870,0.00823974609375
+first_7d_ctr,float64,kpis,CTR de los primeros 7 dias.,False,,,1080,0,0.0,1080,0.00823974609375
+first_7d_cvr,float64,kpis,CVR de los primeros 7 dias.,False,,,1080,0,0.0,1080,0.00823974609375
+first_7d_impressions,int64,kpis,Impresiones de los primeros 7 dias.,False,,,1080,0,0.0,1080,0.00823974609375
+last_7d_clicks,int64,kpis,Clicks de los ultimos 7 dias.,False,,,1080,0,0.0,846,0.00823974609375
+last_7d_conversions,int64,kpis,Conversiones de los ultimos 7 dias.,False,,,1080,0,0.0,318,0.00823974609375
+last_7d_ctr,float64,kpis,CTR de los ultimos 7 dias.,False,,,1080,0,0.0,1080,0.00823974609375
+last_7d_cvr,float64,kpis,CVR de los ultimos 7 dias.,False,,,1080,0,0.0,1060,0.00823974609375
+last_7d_impressions,int64,kpis,Impresiones de los ultimos 7 dias.,False,,,1080,0,0.0,1079,0.00823974609375
+overall_ctr,float64,kpis,CTR global.,False,,,1080,0,0.0,1080,0.00823974609375
+overall_cvr,float64,kpis,CVR global.,False,,,1080,0,0.0,1080,0.00823974609375
+overall_ipm,float64,kpis,Installs/conversiones por mil impresiones.,False,,,1080,0,0.0,1080,0.00823974609375
+overall_roas,float64,kpis,ROAS global.,False,,,1080,0,0.0,1080,0.00823974609375
+peak_day_impressions,int64,kpis,Impresiones del dia pico.,False,,,1080,0,0.0,1080,0.00823974609375
+peak_rolling_ctr_5,float64,kpis,Mejor CTR en ventana movil de 5 dias.,False,,,1080,0,0.0,1080,0.00823974609375
+perf_score,float64,kpis,Score global de rendimiento.,False,,,1080,0,0.0,907,0.00823974609375
+total_clicks,int64,kpis,Clicks totales.,False,,,1080,0,0.0,1065,0.00823974609375
+total_conversions,int64,kpis,Conversiones totales.,False,,,1080,0,0.0,969,0.00823974609375
+total_days_active,int64,kpis,Dias activos del creativo.,False,,,1080,0,0.0,47,0.00823974609375
+total_impressions,int64,kpis,Impresiones totales.,False,,,1080,0,0.0,1080,0.00823974609375
+total_revenue_usd,float64,kpis,Ingresos totales atribuidos en USD.,False,,,1080,0,0.0,1080,0.00823974609375
+total_spend_usd,float64,kpis,Gasto total en USD.,False,,,1080,0,0.0,1079,0.00823974609375
+advertiser_name,str,metadata_creative,Nombre del anunciante.,False,,,1080,0,0.0,36,0.017652511596679688
+app_name,str,metadata_creative,Nombre de la app o producto promocionado.,False,,,1080,0,0.0,123,0.023906707763671875
+asset_file,str,metadata_creative,Ruta o nombre del asset.,False,,,1080,0,0.0,1080,0.0350189208984375
+creative_launch_date,str,metadata_creative,Fecha de lanzamiento del creativo.,False,,,1080,0,0.0,39,0.0185394287109375
+creative_status,str,metadata_creative,Estado de rendimiento/fatiga del creativo.,False,,,1080,0,0.0,4,0.01583099365234375
+cta_text,str,metadata_creative,Texto del call-to-action.,False,,,1080,0,0.0,10,0.018247604370117188
+dominant_color,str,metadata_creative,Color dominante anotado en metadata.,False,,,1080,0,0.0,12,0.01322174072265625
+emotional_tone,str,metadata_creative,Tono emocional del creativo.,False,,,1080,0,0.0,7,0.015996932983398438
+format,str,metadata_creative,"Formato de anuncio (banner, interstitial, rewarded_video, etc.).",False,,,1080,0,0.0,5,0.01800537109375
+headline,str,metadata_creative,Titular principal del anuncio.,False,,,1080,0,0.0,30,0.02596759796142578
+hook_type,str,metadata_creative,Tipo de gancho inicial del mensaje.,False,,,1080,0,0.0,24,0.01839923858642578
+language,str,metadata_creative,Idioma principal del creativo.,False,,,1080,0,0.0,7,0.0102996826171875
+subhead,str,metadata_creative,Subtitulo o texto secundario.,False,,,1080,0,0.0,18,0.030150413513183594
+theme,str,metadata_creative,Tema narrativo o estilo del anuncio.,False,,,1080,0,0.0,20,0.01676654815673828
+vertical,str,metadata_creative,"Vertical de negocio (gaming, fintech, etc.).",False,,,1080,0,0.0,6,0.01750946044921875
+centroid_x_visual_mass,float64,otros,Descripcion no mapeada automaticamente; revisar definicion en pipeline.,False,,,1080,0,0.0,1079,0.00823974609375
+centroid_y_visual_mass,float64,otros,Descripcion no mapeada automaticamente; revisar definicion en pipeline.,False,,,1080,0,0.0,1079,0.00823974609375
+sharpness_laplacian_var,float64,otros,Nitidez estimada (varianza del Laplaciano).,False,,,1080,0,0.0,1079,0.00823974609375
+background_uniformity_score,float64,vision_features,Uniformidad del fondo.,False,,,1080,0,0.0,1079,0.00823974609375
+brightness_mean,float64,vision_features,Media de brillo.,False,,,1080,0,0.0,1078,0.00823974609375
+brightness_std,float64,vision_features,Desviacion estandar de brillo.,False,,,1080,0,0.0,1079,0.00823974609375
+colorfulness,float64,vision_features,Indice de colorido percibido.,False,,,1080,0,0.0,1033,0.00823974609375
+contrast,float64,vision_features,Contraste global de la imagen.,False,,,1080,0,0.0,1079,0.00823974609375
+dominant_color_b,int64,vision_features,Componente B del color dominante calculado por vision.,False,,,1080,0,0.0,93,0.00823974609375
+dominant_color_g,int64,vision_features,Componente G del color dominante calculado por vision.,False,,,1080,0,0.0,107,0.00823974609375
+dominant_color_h,float64,vision_features,Componente H del color dominante calculado por vision.,False,,,1080,0,0.0,910,0.00823974609375
+dominant_color_r,int64,vision_features,Componente R del color dominante calculado por vision.,False,,,1080,0,0.0,84,0.00823974609375
+dominant_color_s,float64,vision_features,Componente S del color dominante calculado por vision.,False,,,1080,0,0.0,920,0.00823974609375
+dominant_color_v,float64,vision_features,Componente V del color dominante calculado por vision.,False,,,1080,0,0.0,948,0.00823974609375
+edge_density,float64,vision_features,Densidad de bordes detectados.,False,,,1080,0,0.0,1005,0.00823974609375
+empty_space_ratio,float64,vision_features,Proporcion de espacio vacio.,False,,,1080,0,0.0,1022,0.00823974609375
+hue_mean,float64,vision_features,Media del matiz (hue).,False,,,1080,0,0.0,1032,0.00823974609375
+hue_std,float64,vision_features,Desviacion estandar del matiz (hue).,False,,,1080,0,0.0,1033,0.00823974609375
+main_object_bbox_area_ratio,float64,vision_features,Coordenada o area del bounding box del objeto principal.,False,,,1080,0,0.0,68,0.00823974609375
+main_object_bbox_x_max,float64,vision_features,Coordenada o area del bounding box del objeto principal.,False,,,1080,0,0.0,47,0.00823974609375
+main_object_bbox_x_min,float64,vision_features,Coordenada o area del bounding box del objeto principal.,False,,,1080,0,0.0,17,0.00823974609375
+main_object_bbox_y_max,float64,vision_features,Coordenada o area del bounding box del objeto principal.,False,,,1080,0,0.0,28,0.00823974609375
+main_object_bbox_y_min,float64,vision_features,Coordenada o area del bounding box del objeto principal.,False,,,1080,0,0.0,21,0.00823974609375
+main_object_center_x,float64,vision_features,"Coordenada del centro del objeto principal normalizada en [0,1].",False,,,1080,0,0.0,46,0.00823974609375
+main_object_center_y,float64,vision_features,"Coordenada del centro del objeto principal normalizada en [0,1].",False,,,1080,0,0.0,36,0.00823974609375
+main_object_is_centered,int64,vision_features,Flag binario: el objeto principal esta centrado.,False,,,1080,0,0.0,2,0.00823974609375
+quadrant_bottom_left_density,float64,vision_features,Densidad visual en un cuadrante de la imagen.,False,,,1080,0,0.0,1078,0.00823974609375
+quadrant_bottom_right_density,float64,vision_features,Densidad visual en un cuadrante de la imagen.,False,,,1080,0,0.0,1079,0.00823974609375
+quadrant_top_left_density,float64,vision_features,Densidad visual en un cuadrante de la imagen.,False,,,1080,0,0.0,1079,0.00823974609375
+quadrant_top_right_density,float64,vision_features,Densidad visual en un cuadrante de la imagen.,False,,,1080,0,0.0,1079,0.00823974609375
+saliency_center_bias,float64,vision_features,Tendencia de la saliencia hacia el centro.,False,,,1080,0,0.0,1078,0.00823974609375
+saturation_mean,float64,vision_features,Media de saturacion.,False,,,1080,0,0.0,1033,0.00823974609375
+saturation_std,float64,vision_features,Desviacion estandar de saturacion.,False,,,1080,0,0.0,1033,0.00823974609375
+symmetry_horizontal_score,float64,vision_features,Score de simetria visual (horizontal o vertical).,False,,,1080,0,0.0,1079,0.00823974609375
+symmetry_vertical_score,float64,vision_features,Score de simetria visual (horizontal o vertical).,False,,,1080,0,0.0,1079,0.00823974609375
+visual_complexity,float64,vision_features,Complejidad visual estimada.,False,,,1080,0,0.0,1079,0.00823974609375
+visual_mass_border_ratio,float64,vision_features,Distribucion de masa visual en una region especifica (ratio).,False,,,1080,0,0.0,1078,0.00823974609375
+visual_mass_bottom_ratio,float64,vision_features,Distribucion de masa visual en una region especifica (ratio).,False,,,1080,0,0.0,1079,0.00823974609375
+visual_mass_center_ratio,float64,vision_features,Distribucion de masa visual en una region especifica (ratio).,False,,,1080,0,0.0,1078,0.00823974609375
+visual_mass_left_ratio,float64,vision_features,Distribucion de masa visual en una region especifica (ratio).,False,,,1080,0,0.0,1078,0.00823974609375
+visual_mass_right_ratio,float64,vision_features,Distribucion de masa visual en una region especifica (ratio).,False,,,1080,0,0.0,1079,0.00823974609375
+visual_mass_top_ratio,float64,vision_features,Distribucion de masa visual en una region especifica (ratio).,False,,,1080,0,0.0,1078,0.00823974609375
