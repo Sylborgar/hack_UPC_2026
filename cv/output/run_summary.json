@@ -1,0 +1,6 @@
+{
+  "total_input_creatives": 1080,
+  "processed_or_available_creatives": 1080,
+  "model_name": "microsoft/Florence-2-base",
+  "device": "auto"
+}
