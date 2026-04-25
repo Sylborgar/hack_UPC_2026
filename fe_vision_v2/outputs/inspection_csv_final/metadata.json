@@ -1,0 +1,26 @@
+{
+  "input_file": "c:\\Users\\sylbo\\Documents_local\\hack_UPC_2026\\fe_vision_v2\\outputs\\creative_visual_features_with_embeddings_pca.csv",
+  "rows": 1080,
+  "columns": 233,
+  "duplicates": 0,
+  "total_memory_mb": 2.092,
+  "numeric_columns": 218,
+  "categorical_columns": 15,
+  "groups_count": {
+    "embeddings_pca": 128,
+    "vision_features": 39,
+    "kpis": 26,
+    "metadata_creative": 15,
+    "creative_attributes": 10,
+    "dimensiones": 6,
+    "copy_video": 4,
+    "otros": 3,
+    "identificadores": 2
+  },
+  "embedding_columns": 128,
+  "embedding_breakdown": {
+    "clip_pca": 64,
+    "cnn_pca": 64
+  },
+  "missing_cells_pct": 0.3501033222063265
+}

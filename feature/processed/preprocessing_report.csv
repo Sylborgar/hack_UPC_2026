@@ -1,0 +1,11 @@
+object,rows,columns,file
+advertisers_clean,36,4,/home/wei/projects/hack_UPC_2026/feature/processed/advertisers_clean.csv
+campaign_dim,180,15,/home/wei/projects/hack_UPC_2026/feature/processed/campaign_dim.csv
+campaign_country,502,2,/home/wei/projects/hack_UPC_2026/feature/processed/campaign_country.csv
+creative_dim,1080,50,/home/wei/projects/hack_UPC_2026/feature/processed/creative_dim.csv
+daily_enriched,192315,67,/home/wei/projects/hack_UPC_2026/feature/processed/daily_enriched.csv
+creative_day,52349,45,/home/wei/projects/hack_UPC_2026/feature/processed/creative_day.csv
+creative_targets,1080,12,/home/wei/projects/hack_UPC_2026/feature/processed/creative_targets.csv
+campaign_kpis,180,9,/home/wei/projects/hack_UPC_2026/feature/processed/campaign_kpis.csv
+creative_feature_base,1080,119,/home/wei/projects/hack_UPC_2026/feature/processed/creative_feature_base.csv
+column_roles,119,2,/home/wei/projects/hack_UPC_2026/feature/processed/column_roles.csv
