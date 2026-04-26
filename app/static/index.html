@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Creative Memory Copilot</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark"></span>
+        <div>
+          <strong>Creative Memory Copilot</strong>
+          <span>Smadex creative intelligence</span>
+        </div>
+      </div>
+      <nav class="tabs" aria-label="Main sections">
+        <button class="tab active" data-view="home">Home</button>
+        <button class="tab" data-view="best">Best creatives</button>
+        <button class="tab" data-view="tired">Worst / tired</button>
+        <button class="tab" data-view="next">Next test</button>
+        <button class="tab" data-view="map">Map</button>
+      </nav>
+    </header>
+
+    <main>
+      <section class="filters-band">
+        <div class="filters">
+          <label>
+            Search
+            <input id="searchInput" type="search" placeholder="Title, app or creative id" />
+          </label>
+          <label>
+            Vertical
+            <select id="verticalFilter">
+              <option value="">All verticals</option>
+            </select>
+          </label>
+          <label>
+            Format
+            <select id="formatFilter">
+              <option value="">All formats</option>
+            </select>
+          </label>
+          <button id="refreshBtn" class="soft-btn">Refresh</button>
+        </div>
+      </section>
+
+      <section class="workspace active" id="view-home">
+        <aside class="case-list-panel">
+          <div class="panel-heading">
+            <h1>All creatives</h1>
+            <p>Busca por título, app o id y revisa las características base de cada caso.</p>
+          </div>
+          <div class="case-list" id="homeList"></div>
+        </aside>
+        <section class="detail-panel" id="homeDetail">
+          <div class="empty-state">Selecciona un creative para ver sus características.</div>
+        </section>
+      </section>
+
+      <section class="workspace" id="view-best">
+        <aside class="case-list-panel">
+          <div class="panel-heading">
+            <h1>Working best</h1>
+            <p>Ranking robusto con contexto de campaña, vertical y formato.</p>
+          </div>
+          <div class="case-list" id="bestList"></div>
+        </aside>
+        <section class="detail-panel" id="bestDetail">
+          <div class="empty-state">Selecciona un creative para ver evidencia y explicación Groq.</div>
+        </section>
+      </section>
+
+      <section class="workspace" id="view-tired">
+        <aside class="case-list-panel">
+          <div class="panel-heading">
+            <h1>Tired or repetitive</h1>
+            <p>Fatiga de performance y repetición por similitud creativa.</p>
+          </div>
+          <div class="case-list" id="tiredList"></div>
+        </aside>
+        <section class="detail-panel" id="tiredDetail">
+          <div class="empty-state">Selecciona un caso cansado o repetitivo.</div>
+        </section>
+      </section>
+
+      <section class="workspace single" id="view-next">
+        <section class="brief-panel">
+          <div class="panel-heading">
+            <h1>What should we test next?</h1>
+            <p>Describe un nuevo brief y comparamos contra patrones ganadores y débiles.</p>
+          </div>
+          <div class="brief-box">
+            <textarea id="briefInput" rows="4">Quiero hacer un anuncio de Gaming con gameplay visible, recompensa y CTA directo.</textarea>
+            <div class="brief-actions">
+              <select id="briefVertical">
+                <option value="">Infer vertical</option>
+              </select>
+              <select id="briefFormat">
+                <option value="">Any format</option>
+              </select>
+              <button id="matchBriefBtn" class="primary-btn">Find patterns</button>
+              <button id="explainBriefBtn" class="soft-btn">Explain with Groq</button>
+            </div>
+            <div class="map-info compact" id="briefInference">
+              <span>Vertical: waiting</span>
+            </div>
+          </div>
+          <div class="guidance-grid">
+            <div class="guidance good">
+              <h2>Do</h2>
+              <ul id="doList"></ul>
+            </div>
+            <div class="guidance bad">
+              <h2>Don't</h2>
+              <ul id="dontList"></ul>
+            </div>
+          </div>
+          <div id="briefExplanation" class="llm-box hidden"></div>
+          <div class="match-columns">
+            <div>
+              <h2>Closest winners</h2>
+              <div class="mini-list" id="bestMatches"></div>
+            </div>
+            <div>
+              <h2>Closest weak cases</h2>
+              <div class="mini-list" id="avoidMatches"></div>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section class="workspace single" id="view-map">
+        <section class="map-panel">
+          <div class="panel-heading">
+            <h1>Creative landscape</h1>
+            <p>Mapa 2D desde el mismo vector multimodal del CBR. Resalta el caso seleccionado y los casos del brief.</p>
+          </div>
+          <div class="map-info" id="mapInfo">
+            <span>Seleccionado: ninguno</span>
+            <span>Similar CBR: 0</span>
+            <span>Brief winners: 0</span>
+            <span>Brief weak cases: 0</span>
+          </div>
+          <div class="map-tools">
+            <button id="zoomInBtn" class="soft-btn">Zoom +</button>
+            <button id="zoomOutBtn" class="soft-btn">Zoom -</button>
+            <button id="resetMapBtn" class="soft-btn">Reset</button>
+          </div>
+          <div class="map-layout">
+            <canvas id="landscapeCanvas" width="1200" height="620" aria-label="Creative landscape"></canvas>
+            <aside class="map-detail" id="mapDetail">
+              <div class="empty-state small">Haz click en un punto para ver información básica.</div>
+            </aside>
+          </div>
+          <div class="legend">
+            <span><i class="dot top"></i>top performer</span>
+            <span><i class="dot stable"></i>stable</span>
+            <span><i class="dot fatigued"></i>fatigued</span>
+            <span><i class="dot under"></i>underperformer</span>
+            <span><i class="ring selected"></i>selected</span>
+            <span><i class="ring similar"></i>similar CBR</span>
+            <span><i class="ring proposed"></i>brief match</span>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <div class="image-modal hidden" id="imageModal" aria-hidden="true">
+      <button class="image-modal-backdrop" id="imageModalBackdrop" aria-label="Close image preview"></button>
+      <section class="image-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="imageModalTitle">
+        <div class="image-modal-header">
+          <h2 id="imageModalTitle">Creative detail</h2>
+          <button class="soft-btn icon-btn" id="imageModalClose" aria-label="Close">×</button>
+        </div>
+        <div class="image-modal-stage">
+          <img id="imageModalImg" alt="Creative detailed preview" />
+        </div>
+      </section>
+    </div>
+
+    <div class="explain-modal hidden" id="explainModal" aria-hidden="true">
+      <button class="explain-modal-backdrop" id="explainModalBackdrop" aria-label="Close explanation"></button>
+      <section class="explain-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="explainModalTitle">
+        <div class="explain-modal-header">
+          <h2 id="explainModalTitle">Explain creative</h2>
+          <button class="soft-btn icon-btn" id="explainModalClose" aria-label="Close">&times;</button>
+        </div>
+        <div class="explain-modal-body" id="explainModalBody"></div>
+      </section>
+    </div>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
+

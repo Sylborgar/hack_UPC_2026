@@ -1,0 +1,13 @@
+{
+  "input_path": "/home/wei/projects/hack_UPC_2026/dataset/output/creative_feature_base_tabular_visual_cv.parquet",
+  "input_shape": [
+    1080,
+    401
+  ],
+  "final_cbr_cases_path": "/home/wei/projects/hack_UPC_2026/dataset/final/creative_cbr_cases_final.parquet",
+  "final_cbr_cases_shape": [
+    1080,
+    336
+  ],
+  "recommendation": "Use creative_cbr_cases_final as the case table; use cbr_feature_sets.json to choose feature columns per prelaunch/early window. Fit scalers/PCA after split, not on the full dataset."
+}

@@ -1,0 +1,12 @@
+pandas
+numpy
+scikit-learn
+faiss-cpu
+pyyaml
+pydantic
+joblib
+pyarrow
+tqdm
+rich
+pytest
+scipy
