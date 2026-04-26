@@ -8,5 +8,6 @@ __pycache__/
 *.tmp
 *.env
 .env.*
+!.env.example
 feature/processed/daily_enriched.csv
 test_env
