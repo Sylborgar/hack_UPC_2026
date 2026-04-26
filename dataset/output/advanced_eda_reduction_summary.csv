@@ -1,0 +1,12 @@
+metric,value
+input_columns,401
+drop_always_columns,39
+drop_correlated_candidates,44
+final_case_columns,336
+candidate_similarity_features,287
+numeric_similarity_features,281
+categorical_similarity_features,6
+prelaunch_features,257
+early_3d_features,270
+early_7d_features,281
+early_14d_features,287
