@@ -264,8 +264,17 @@ def write_question1_outputs(
         paths["top_by_vertical_format_csv"], index=False
     )
 
+    explanation_rows = build_question1_explanations(ranking_out, memory)
+    _write_jsonl(paths["winner_explanations_jsonl"], explanation_rows)
+    return paths
+
+
+def build_question1_explanations(
+    ranking_out: pd.DataFrame, memory: CreativeMemory, limit: int | None = None
+) -> list[dict[str, Any]]:
+    rows = ranking_out if limit is None else ranking_out.head(limit)
     explanation_rows = []
-    for row in ranking_out.head(50).itertuples(index=False):
+    for row in rows.itertuples(index=False):
         creative_id = int(row.creative_id)
         neighbor_summary = memory.summarize_neighbors(creative_id, k=10)
         explanation_rows.append(
@@ -289,10 +298,13 @@ def write_question1_outputs(
                     "impressions": _int_or_none(getattr(row, "lifecycle_impressions")),
                 },
                 "similar_cases": neighbor_summary,
+                "llm_instruction": (
+                    "Explain the performance using ranking, context and similar cases. "
+                    "Do not invent causes outside the evidence."
+                ),
             }
         )
-    _write_jsonl(paths["winner_explanations_jsonl"], explanation_rows)
-    return paths
+    return explanation_rows
 
 
 def _top_by_group(df: pd.DataFrame, group_cols: list[str], n: int) -> pd.DataFrame:
@@ -486,8 +498,17 @@ def write_question2_outputs(
         .sort_values("creatives", ascending=False)
     )
     summary.to_csv(paths["health_summary_csv"], index=False)
+    explanation_rows = build_question2_explanations(health)
+    _write_jsonl(paths["health_explanations_jsonl"], explanation_rows)
+    return paths
+
+
+def build_question2_explanations(
+    health: pd.DataFrame, limit: int | None = None
+) -> list[dict[str, Any]]:
+    rows = health if limit is None else health.head(limit)
     explanation_rows = []
-    for row in health.head(200).itertuples(index=False):
+    for row in rows.itertuples(index=False):
         explanation_rows.append(
             {
                 "creative_id": int(row.creative_id),
@@ -514,8 +535,7 @@ def write_question2_outputs(
                 ),
             }
         )
-    _write_jsonl(paths["health_explanations_jsonl"], explanation_rows)
-    return paths
+    return explanation_rows
 
 
 def build_next_test_table(
@@ -580,6 +600,11 @@ def build_next_test_table(
                 "next_test": next_test,
                 "evidence": evidence,
                 "suggestions": suggestions,
+                "recommendation_basis": (
+                    "aggregated_top_k_winner_pattern"
+                    if len(winner_neighbors) >= 3
+                    else "fallback_contextual_winner_pattern"
+                ),
                 "llm_instruction": (
                     "Use only this structured evidence. Do not invent causes; write a concise "
                     "marketer-facing explanation and next-test recommendation."
@@ -686,6 +711,16 @@ def _recommendation_evidence(
     winner_neighbors: pd.DataFrame,
 ) -> dict[str, Any]:
     status = neighbors["creative_status"].astype(str) if not neighbors.empty else pd.Series(dtype=str)
+    nearest_case = None
+    if not neighbors.empty:
+        nearest = neighbors.iloc[0]
+        nearest_case = {
+            "creative_id": _int_or_none(nearest.get("creative_id")),
+            "similarity": _round_or_none(nearest.get("similarity")),
+            "creative_status": nearest.get("creative_status"),
+            "overall_roas": _round_or_none(nearest.get("overall_roas")),
+            "overall_ipm": _round_or_none(nearest.get("overall_ipm")),
+        }
     return {
         "ranking": {
             "best_score": _round_or_none(rank_row.get("best_score")),
@@ -708,6 +743,11 @@ def _recommendation_evidence(
             if not neighbors.empty
             else None,
             "winner_reference_count": int(len(winner_neighbors)),
+            "nearest_case_as_evidence": nearest_case,
+            "basis": (
+                "recommendation is based on the aggregate pattern of winner references, "
+                "not by copying the nearest case"
+            ),
         },
     }
 
@@ -756,6 +796,19 @@ def run_all_questions(
     next_tests, cards = build_next_test_table(cases, ranking, health, memory, k=20)
     q3_paths = write_question3_outputs(next_tests, cards)
 
+    from .database import create_creative_memory_db
+
+    db_path = create_creative_memory_db(
+        cases=cases,
+        ranking=ranking,
+        health=health,
+        next_tests=next_tests,
+        recommendation_cards=cards,
+        memory=memory,
+        q1_explanations_path=q1_paths["winner_explanations_jsonl"],
+        q2_explanations_path=q2_paths["health_explanations_jsonl"],
+    )
+
     return {
         "cases_shape": list(cases.shape),
         "memory_feature_set": memory_feature_set,
@@ -768,6 +821,7 @@ def run_all_questions(
         "question1": {key: str(value) for key, value in q1_paths.items()},
         "question2": {key: str(value) for key, value in q2_paths.items()},
         "question3": {key: str(value) for key, value in q3_paths.items()},
+        "database": str(db_path),
     }
 
 

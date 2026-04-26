@@ -94,3 +94,56 @@ next_tests/outputs/question3_recommendation_cards.jsonl
 ```
 
 Por defecto, el CBR usa `prelaunch_feature_cols`, que evita usar performance futura para calcular similitud.
+
+La ejecucion tambien crea una base SQLite para la app:
+
+```text
+dataset/final/creative_memory.db
+```
+
+Tablas principales:
+
+```text
+creatives
+question1_winner_ranking
+question2_creative_health
+question3_next_tests
+creative_neighbors
+creative_explanations
+creative_landscape
+metadata
+```
+
+La recomendacion de `question3_next_tests` no copia el vecino mas parecido. Usa el vecino mas cercano como evidencia, pero la propuesta se basa en el patron agregado de vecinos similares que fueron `top_performer`.
+
+El mapa `creative_landscape` usa UMAP si esta instalado. Si no, genera una proyeccion 2D con t-SNE sobre PCA desde el mismo vector multimodal del CBR.
+
+## App local
+
+Instala dependencias de la app si hace falta:
+
+```bash
+.venv/bin/python -m pip install -r app/requirements.txt
+```
+
+Crea o edita `.env` en la raiz:
+
+```bash
+GROQ_API_KEY=
+GROQ_MODEL=llama-3.1-8b-instant
+GROQ_TEMPERATURE=0.55
+APP_HOST=127.0.0.1
+APP_PORT=8000
+```
+
+Arranca API y frontend:
+
+```bash
+.venv/bin/python -m app.api
+```
+
+Abre:
+
+```text
+http://127.0.0.1:8000
+```

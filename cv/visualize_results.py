@@ -206,8 +206,8 @@ def main():
             combined.save(out_file)
             count += 1
             
-            if count >= 20: # Visualize first 20 as an example
-                break
+            # if count >= 20: # Visualize first 20 as an example
+            #     break
                 
     print(f"Successfully generated {count} visualizations in {output_dir}")
 

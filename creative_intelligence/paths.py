@@ -19,6 +19,7 @@ DATASET_OUTPUT = ROOT / "dataset" / "output"
 
 CBR_CASES_PATH = DATASET_FINAL / "creative_cbr_cases_final.parquet"
 CBR_FEATURE_SETS_PATH = DATASET_FINAL / "cbr_feature_sets.json"
+CREATIVE_MEMORY_DB_PATH = DATASET_FINAL / "creative_memory.db"
 
 BEST_CREATIVES_OUTPUT = ROOT / "best_creatives" / "outputs"
 FATIGUE_REPETITION_OUTPUT = ROOT / "fatigue_repetition" / "outputs"
