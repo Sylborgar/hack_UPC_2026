@@ -1,0 +1,12 @@
+check,value,detail
+rows_preserved,True,"base=1080, joined=1080"
+unique_creative_id,True,"unique=1080, rows=1080"
+rows_with_fe_vision_values,1080,out_of=1080
+image_quality_ok,1080,out_of=1080
+evidence_jsonl_rows,1080,/home/wei/projects/hack_UPC_2026/dataset/output/creative_cv_evidence.jsonl
+prompt_ids_available,1080,/home/wei/projects/hack_UPC_2026/cv/output/creative_prompt_analysis.jsonl
+spatial_element_ids_available,1080,/home/wei/projects/hack_UPC_2026/cv/output/creative_spatial_elements.jsonl
+tabular_visual_shape,True,"(1080, 310)"
+tabular_plus_cv_shape,True,"(1080, 401)"
+raw_clip_embedding_strategy,True,kept as sidecar: creative_clip_embeddings.parquet (512 dims)
+raw_cnn_embedding_strategy,True,kept as sidecar: creative_cnn_embeddings.parquet (2048 dims)
