@@ -30,12 +30,28 @@ def parse_args() -> argparse.Namespace:
         ],
         help="Feature set used by the CBR similarity module.",
     )
+    parser.add_argument(
+        "--cbr-backend",
+        choices=["engine", "legacy"],
+        default="engine",
+        help="Similarity backend. 'engine' uses the advanced cbr_engine adapter.",
+    )
+    parser.add_argument(
+        "--force-rebuild-cbr",
+        action="store_true",
+        help="Force rebuilding the persisted cbr_engine index before generating outputs.",
+    )
     return parser.parse_args()
 
 
 def main() -> None:
     args = parse_args()
-    summary = run_all_questions(cases_path=args.cases_path, memory_feature_set=args.feature_set)
+    summary = run_all_questions(
+        cases_path=args.cases_path,
+        memory_feature_set=args.feature_set,
+        cbr_backend=args.cbr_backend,
+        force_rebuild_cbr=args.force_rebuild_cbr,
+    )
     print(json.dumps(summary, indent=2, ensure_ascii=False))
 
 

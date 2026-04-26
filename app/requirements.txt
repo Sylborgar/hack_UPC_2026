@@ -1,3 +1,6 @@
 pandas
 scikit-learn
 umap-learn
+pyyaml
+joblib
+scipy

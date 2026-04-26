@@ -140,6 +140,7 @@
           </div>
           <div class="map-info" id="mapInfo">
             <span>Seleccionado: ninguno</span>
+            <span>Similar CBR: 0</span>
             <span>Brief winners: 0</span>
             <span>Brief weak cases: 0</span>
           </div>
@@ -160,12 +161,27 @@
             <span><i class="dot fatigued"></i>fatigued</span>
             <span><i class="dot under"></i>underperformer</span>
             <span><i class="ring selected"></i>selected</span>
+            <span><i class="ring similar"></i>similar CBR</span>
             <span><i class="ring proposed"></i>brief match</span>
           </div>
         </section>
       </section>
     </main>
 
+    <div class="image-modal hidden" id="imageModal" aria-hidden="true">
+      <button class="image-modal-backdrop" id="imageModalBackdrop" aria-label="Close image preview"></button>
+      <section class="image-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="imageModalTitle">
+        <div class="image-modal-header">
+          <h2 id="imageModalTitle">Creative detail</h2>
+          <button class="soft-btn icon-btn" id="imageModalClose" aria-label="Close">×</button>
+        </div>
+        <div class="image-modal-stage">
+          <img id="imageModalImg" alt="Creative detailed preview" />
+        </div>
+      </section>
+    </div>
+
     <script src="/app.js"></script>
   </body>
 </html>
+

@@ -80,7 +80,16 @@ DISPLAY_COLS = [
 
 
 def load_cases(path: Path | str = CBR_CASES_PATH) -> pd.DataFrame:
-    return pd.read_parquet(path)
+    path = Path(path)
+    if path.suffix.lower() == ".csv":
+        return pd.read_csv(path)
+    try:
+        return pd.read_parquet(path)
+    except ImportError:
+        csv_path = path.with_suffix(".csv")
+        if csv_path.exists():
+            return pd.read_csv(csv_path)
+        raise
 
 
 def load_feature_sets(path: Path | str = CBR_FEATURE_SETS_PATH) -> dict[str, list[str]]:

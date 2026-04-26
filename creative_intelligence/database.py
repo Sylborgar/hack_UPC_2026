@@ -79,6 +79,9 @@ def create_creative_memory_db(
                 {"key": "neighbor_k", "value": str(neighbor_k)},
                 {"key": "memory_feature_set", "value": memory.feature_set_name},
                 {"key": "memory_feature_count", "value": str(len(memory.feature_cols))},
+                {"key": "memory_backend", "value": str(getattr(memory, "backend_name", "legacy"))},
+                {"key": "memory_blocks", "value": _json_dumps(getattr(memory, "columns_by_block", {}))},
+                {"key": "memory_weights", "value": _json_dumps(getattr(getattr(memory, "config", None), "block_weights", lambda: {})())},
                 {"key": "recommendation_basis", "value": "aggregate top-k winner pattern"},
             ]
         )
@@ -130,6 +133,13 @@ def build_neighbors_table(memory: CreativeMemory, k: int = 20) -> pd.DataFrame:
                     "neighbor_cvr": _float_or_none(getattr(neighbor, "overall_cvr", None)),
                     "neighbor_has_fatigue": _int_or_none(getattr(neighbor, "has_fatigue", None)),
                     "neighbor_fatigue_day": _float_or_none(getattr(neighbor, "fatigue_day", None)),
+                    "final_score": _float_or_none(getattr(neighbor, "final_score", None)),
+                    "similarity_clip": _float_or_none(getattr(neighbor, "similarity_clip", None)),
+                    "similarity_cnn": _float_or_none(getattr(neighbor, "similarity_cnn", None)),
+                    "similarity_visual_numeric": _float_or_none(getattr(neighbor, "similarity_visual_numeric", None)),
+                    "similarity_text_numeric": _float_or_none(getattr(neighbor, "similarity_text_numeric", None)),
+                    "similarity_categorical_context": _float_or_none(getattr(neighbor, "similarity_categorical_context", None)),
+                    "reason_codes": _json_dumps(getattr(neighbor, "reason_codes", None)),
                 }
             )
     return pd.DataFrame(rows)

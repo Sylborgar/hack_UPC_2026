@@ -3,7 +3,9 @@ const state = {
   selected: null,
   lastBrief: null,
   landscape: [],
+  mapNeighbors: new Set(),
   mapPointById: new Map(),
+  mapSearchSeq: 0,
   map: {
     scale: 1,
     offsetX: 0,
@@ -34,7 +36,8 @@ function fmt(value, digits = 3) {
 }
 
 function creativeImageBlock(c) {
-  const hasDetail = Boolean(c.visualized_url);
+  const detailUrl = c.visualized_url || c.asset_url;
+  const hasImage = Boolean(detailUrl);
   return `
     <div class="creative-media">
       <img class="hero-img" data-creative-image src="${esc(c.asset_url)}" alt="Creative ${esc(c.creative_id)}">
@@ -42,24 +45,47 @@ function creativeImageBlock(c) {
         class="soft-btn full-btn image-detail-toggle"
         data-image-toggle
         data-original-url="${esc(c.asset_url)}"
-        data-detail-url="${esc(c.visualized_url || "")}"
-        ${hasDetail ? "" : "disabled"}
-      >${hasDetail ? "Detail" : "No detail"}</button>
+        data-detail-url="${esc(detailUrl || "")}"
+        data-image-title="${esc(c.headline || c.app_name || `Creative ${c.creative_id}`)}"
+        ${hasImage ? "" : "disabled"}
+      >${c.visualized_url ? "Detail" : "Open image"}</button>
     </div>
   `;
 }
 
 function bindImageToggle(panel) {
   panel.querySelectorAll("[data-image-toggle]").forEach((button) => {
-    const img = button.closest(".creative-media").querySelector("[data-creative-image]");
-    if (!img || !button.dataset.detailUrl) return;
-    let showingDetail = false;
+    if (!button.dataset.detailUrl) return;
     button.addEventListener("click", () => {
-      showingDetail = !showingDetail;
-      img.src = showingDetail ? button.dataset.detailUrl : button.dataset.originalUrl;
-      button.textContent = showingDetail ? "Original" : "Detail";
+      openImageModal(button.dataset.detailUrl, button.dataset.imageTitle || "Creative detail");
     });
   });
+}
+
+function bindImageModal() {
+  $("imageModalClose").addEventListener("click", closeImageModal);
+  $("imageModalBackdrop").addEventListener("click", closeImageModal);
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeImageModal();
+  });
+}
+
+function openImageModal(url, title) {
+  if (!url) return;
+  $("imageModalTitle").textContent = title || "Creative detail";
+  $("imageModalImg").src = url;
+  $("imageModal").classList.remove("hidden");
+  $("imageModal").setAttribute("aria-hidden", "false");
+  document.body.classList.add("modal-open");
+}
+
+function closeImageModal() {
+  const modal = $("imageModal");
+  if (!modal || modal.classList.contains("hidden")) return;
+  modal.classList.add("hidden");
+  modal.setAttribute("aria-hidden", "true");
+  $("imageModalImg").removeAttribute("src");
+  document.body.classList.remove("modal-open");
 }
 
 async function api(path, options = {}) {
@@ -76,6 +102,7 @@ async function init() {
   bindTabs();
   bindControls();
   bindMapControls();
+  bindImageModal();
   await loadOptions();
   await loadList("home");
   await runBriefMatch(false);
@@ -110,7 +137,10 @@ async function switchView(view, preferredId = null) {
   document.querySelectorAll(".workspace").forEach((panel) => panel.classList.remove("active"));
   $(`view-${view}`).classList.add("active");
   if (["home", "best", "tired"].includes(view)) await loadList(view, preferredId);
-  if (view === "map") await loadLandscape();
+  if (view === "map") {
+    await loadLandscape();
+    if ($("searchInput").value.trim()) await searchMapSelection();
+  }
 }
 
 function bindControls() {
@@ -118,8 +148,12 @@ function bindControls() {
   $("verticalFilter").addEventListener("change", () => refreshActiveView());
   $("formatFilter").addEventListener("change", () => refreshActiveView());
   $("searchInput").addEventListener("input", debounce(() => {
-    if (["home", "best", "tired"].includes(state.activeView)) loadList(state.activeView);
-  }, 180));
+    if (state.activeView === "map") {
+      searchMapSelection();
+    } else if (["home", "best", "tired"].includes(state.activeView)) {
+      loadList(state.activeView);
+    }
+  }, 220));
   $("matchBriefBtn").addEventListener("click", () => runBriefMatch(false));
   $("explainBriefBtn").addEventListener("click", () => runBriefMatch(true));
 }
@@ -330,11 +364,16 @@ function renderQuestionDetail(panel, detail, view) {
 }
 
 function neighborCard(n) {
+  const blockLine = n.similarity_clip === null || n.similarity_clip === undefined
+    ? ""
+    : `<div class="meta-line">CLIP ${fmt(n.similarity_clip)} · CNN ${fmt(n.similarity_cnn)} · ctx ${fmt(n.similarity_categorical_context)}</div>`;
+  const finalLine = n.final_score === null || n.final_score === undefined ? "" : ` · final ${fmt(n.final_score)}`;
   return `
     <button class="neighbor" data-neighbor-id="${esc(n.neighbor_id)}">
       <strong>#${esc(n.neighbor_rank)} · ${esc(n.neighbor_id)}</strong>
       <div class="meta-line">${esc(n.neighbor_headline || n.neighbor_app_name || "")}</div>
-      <div class="meta-line">${esc(n.neighbor_status)} · sim ${fmt(n.similarity)}</div>
+      <div class="meta-line">${esc(n.neighbor_status)} · sim ${fmt(n.similarity)}${finalLine}</div>
+      ${blockLine}
       <div class="meta-line">ROAS ${fmt(n.neighbor_roas, 2)} · IPM ${fmt(n.neighbor_ipm, 2)}</div>
     </button>
   `;
@@ -440,7 +479,33 @@ async function loadLandscape() {
   const params = filtersQuery(false);
   const data = await api(`/api/landscape?${params.toString()}`);
   state.landscape = data.items || [];
-  drawLandscape();
+  if (state.selected) {
+    await selectMapCase(state.selected, { center: true, ensureVisible: true });
+  } else {
+    drawLandscape();
+  }
+}
+
+async function searchMapSelection() {
+  if (state.activeView !== "map") return;
+  const q = $("searchInput").value.trim();
+  const seq = ++state.mapSearchSeq;
+  if (!q) {
+    state.mapNeighbors = new Set();
+    drawLandscape();
+    return;
+  }
+
+  const params = filtersQuery(true);
+  params.set("view", "all");
+  params.set("limit", "1");
+  let data = await api(`/api/creatives?${params.toString()}`);
+  if (!data.items.length && ($("verticalFilter").value || $("formatFilter").value)) {
+    const loose = new URLSearchParams({ view: "all", limit: "1", q });
+    data = await api(`/api/creatives?${loose.toString()}`);
+  }
+  if (seq !== state.mapSearchSeq || !data.items.length) return;
+  await selectMapCase(Number(data.items[0].creative_id), { center: true, ensureVisible: true });
 }
 
 function bindMapControls() {
@@ -524,6 +589,7 @@ function drawLandscape() {
     ctx.fill();
   }
   ctx.globalAlpha = 1;
+  drawHighlightSet(ctx, highlight.neighbors, "#2f6f8f", 6.5, "");
   drawHighlightSet(ctx, highlight.best, "#2aa79b", 8, "best match");
   drawHighlightSet(ctx, highlight.avoid, "#d86161", 8, "weak match");
   drawSelectedPoint(ctx);
@@ -573,10 +639,38 @@ function nearestMapPoint(x, y) {
 }
 
 async function selectMapPoint(id) {
+  await selectMapCase(id, { center: false, ensureVisible: false });
+}
+
+async function selectMapCase(id, options = {}) {
+  const { center = true, ensureVisible = true } = options;
   state.selected = Number(id);
-  drawLandscape();
   const detail = await api(`/api/creative/${id}`);
+  state.mapNeighbors = new Set((detail.neighbors || []).map((item) => Number(item.neighbor_id)));
+
+  if (ensureVisible && !state.landscape.some((point) => Number(point.creative_id) === Number(id))) {
+    $("verticalFilter").value = "";
+    $("formatFilter").value = "";
+    const data = await api("/api/landscape");
+    state.landscape = data.items || [];
+  }
+
   renderMapDetail(detail);
+  if (center) centerMapOnCreative(id);
+  drawLandscape();
+}
+
+function centerMapOnCreative(id) {
+  const point = state.landscape.find((item) => Number(item.creative_id) === Number(id));
+  if (!point) return;
+  const canvas = $("landscapeCanvas");
+  const rect = canvas.getBoundingClientRect();
+  if (!rect.width || !rect.height) return;
+  state.map.scale = Math.max(state.map.scale, 1.35);
+  const baseX = ((Number(point.landscape_x) + 1) / 2) * (rect.width - 32) + 16;
+  const baseY = ((Number(point.landscape_y) + 1) / 2) * (rect.height - 32) + 16;
+  state.map.offsetX = -((baseX - rect.width / 2) * state.map.scale);
+  state.map.offsetY = -((baseY - rect.height / 2) * state.map.scale);
 }
 
 function renderMapDetail(detail) {
@@ -585,7 +679,15 @@ function renderMapDetail(detail) {
   const q2 = detail.q2 || {};
   const q3 = detail.q3 || {};
   $("mapDetail").innerHTML = `
-    <img class="map-thumb" src="${esc(c.asset_url)}" alt="Creative ${esc(c.creative_id)}">
+    <div class="map-media">
+      <img class="map-thumb" src="${esc(c.asset_url)}" alt="Creative ${esc(c.creative_id)}">
+      <button
+        class="soft-btn full-btn image-detail-toggle"
+        data-image-toggle
+        data-detail-url="${esc(c.visualized_url || c.asset_url || "")}"
+        data-image-title="${esc(c.headline || c.app_name || `Creative ${c.creative_id}`)}"
+      >Detail</button>
+    </div>
     <h2>${esc(c.headline || c.app_name || c.creative_id)}</h2>
     <p class="meta-line">#${esc(c.creative_id)} · ${esc(c.vertical)} · ${esc(c.format)}</p>
     <div class="metric-row">
@@ -597,9 +699,17 @@ function renderMapDetail(detail) {
       <strong>Next test</strong>
       <p>${esc(q3.next_test || "No recommendation")}</p>
     </div>
+    <h2 class="map-neighbor-title">Similar CBR cases</h2>
+    <div class="map-neighbor-list">
+      ${(detail.neighbors || []).slice(0, 6).map(neighborCard).join("")}
+    </div>
     <button class="primary-btn full-btn" id="openMapCaseBtn">Open in Home</button>
   `;
+  bindImageToggle($("mapDetail"));
   $("openMapCaseBtn").addEventListener("click", () => openHomeCase(Number(c.creative_id)));
+  $("mapDetail").querySelectorAll("[data-neighbor-id]").forEach((button) => {
+    button.addEventListener("click", () => selectMapCase(Number(button.dataset.neighborId), { center: true, ensureVisible: true }));
+  });
 }
 
 function highlightSets() {
@@ -607,9 +717,10 @@ function highlightSets() {
   const avoidCases = state.lastBrief && state.lastBrief.avoid_cases ? state.lastBrief.avoid_cases : [];
   const best = new Set(bestCases.map((item) => Number(item.creative_id)));
   const avoid = new Set(avoidCases.map((item) => Number(item.creative_id)));
-  const any = new Set([...best, ...avoid]);
+  const neighbors = state.mapNeighbors || new Set();
+  const any = new Set([...best, ...avoid, ...neighbors]);
   if (state.selected) any.add(Number(state.selected));
-  return { best, avoid, any };
+  return { best, avoid, neighbors, any };
 }
 
 function drawHighlightSet(ctx, ids, color, radius, label) {
@@ -621,9 +732,11 @@ function drawHighlightSet(ctx, ids, color, radius, label) {
     ctx.strokeStyle = color;
     ctx.lineWidth = 2.5;
     ctx.stroke();
-    ctx.fillStyle = color;
-    ctx.font = "700 11px Inter, sans-serif";
-    ctx.fillText(label, point.x + radius + 4, point.y + 4);
+    if (label) {
+      ctx.fillStyle = color;
+      ctx.font = "700 11px Inter, sans-serif";
+      ctx.fillText(label, point.x + radius + 4, point.y + 4);
+    }
   }
 }
 
@@ -648,6 +761,7 @@ function updateMapInfo(highlight) {
   const method = state.landscape[0] ? state.landscape[0].landscape_method : "unknown";
   info.innerHTML = `
     <span>Seleccionado: ${esc(selected)}</span>
+    <span>Similar CBR: ${highlight.neighbors.size}</span>
     <span>Brief winners: ${highlight.best.size}</span>
     <span>Brief weak cases: ${highlight.avoid.size}</span>
     <span>Projection: ${esc(method)}</span>
@@ -683,3 +797,6 @@ window.addEventListener("resize", () => {
 init().catch((err) => {
   console.error(err);
 });
+
+
+

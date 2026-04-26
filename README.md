@@ -30,6 +30,14 @@ Cada bloque se imputa, escala y normaliza L2 por separado. Despues se aplica el 
 
 ## Ejecucion
 
+Arrancar la web con todo ya integrado:
+
+```powershell
+python -m app.api
+```
+
+La app usa `dataset/final/creative_memory.db`. Si la DB falta o fue generada con el CBR antiguo, se reconstruye automaticamente con `cbr_engine` antes de levantar el servidor.
+
 Construir indice:
 
 ```powershell

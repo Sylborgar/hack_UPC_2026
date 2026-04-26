@@ -7,10 +7,14 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
-from .cbr import CreativeMemory, load_cases
+from cbr_engine import CreativeMemoryEngineAdapter
+from cbr_engine.data_loader import load_cases, write_dataframe
+
+from .cbr import CreativeMemory as LegacyCreativeMemory
 from .paths import (
     BEST_CREATIVES_OUTPUT,
     CBR_CASES_PATH,
+    CBR_FEATURE_SETS_PATH,
     FATIGUE_REPETITION_OUTPUT,
     NEXT_TESTS_OUTPUT,
 )
@@ -238,7 +242,7 @@ def _add_contextual_benchmarks(ranking: pd.DataFrame) -> pd.DataFrame:
 
 def write_question1_outputs(
     ranking: pd.DataFrame,
-    memory: CreativeMemory,
+    memory: Any,
     output_dir: Path = BEST_CREATIVES_OUTPUT,
 ) -> dict[str, Path]:
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -256,7 +260,7 @@ def write_question1_outputs(
     }
 
     ranking_out.to_csv(paths["winner_ranking_csv"], index=False)
-    ranking_out.to_parquet(paths["winner_ranking_parquet"], index=False)
+    paths["winner_ranking_parquet"] = write_dataframe(ranking_out, paths["winner_ranking_parquet"], index=False)
     ranking_out.head(20).to_csv(paths["top_global_csv"], index=False)
     _top_by_group(ranking_out, ["campaign_id"], 3).to_csv(paths["top_by_campaign_csv"], index=False)
     _top_by_group(ranking_out, ["vertical"], 10).to_csv(paths["top_by_vertical_csv"], index=False)
@@ -270,7 +274,7 @@ def write_question1_outputs(
 
 
 def build_question1_explanations(
-    ranking_out: pd.DataFrame, memory: CreativeMemory, limit: int | None = None
+    ranking_out: pd.DataFrame, memory: Any, limit: int | None = None
 ) -> list[dict[str, Any]]:
     rows = ranking_out if limit is None else ranking_out.head(limit)
     explanation_rows = []
@@ -317,7 +321,7 @@ def _top_by_group(df: pd.DataFrame, group_cols: list[str], n: int) -> pd.DataFra
     )
 
 
-def build_health_table(cases: pd.DataFrame, memory: CreativeMemory, k: int = 20) -> pd.DataFrame:
+def build_health_table(cases: pd.DataFrame, memory: Any, k: int = 20) -> pd.DataFrame:
     health = cases[
         [
             col
@@ -484,7 +488,7 @@ def write_question2_outputs(
         "health_explanations_jsonl": output_dir / "question2_health_explanations.jsonl",
     }
     health.to_csv(paths["creative_health_csv"], index=False)
-    health.to_parquet(paths["creative_health_parquet"], index=False)
+    paths["creative_health_parquet"] = write_dataframe(health, paths["creative_health_parquet"], index=False)
     health[health["fatigue_status"].isin(["tired", "at_risk"])].head(100).to_csv(
         paths["tired_creatives_csv"], index=False
     )
@@ -542,7 +546,7 @@ def build_next_test_table(
     cases: pd.DataFrame,
     ranking: pd.DataFrame,
     health: pd.DataFrame,
-    memory: CreativeMemory,
+    memory: Any,
     k: int = 20,
 ) -> tuple[pd.DataFrame, list[dict[str, Any]]]:
     ranking_lookup = ranking.set_index("creative_id", drop=False)
@@ -774,7 +778,7 @@ def write_question3_outputs(
         "recommendation_cards_jsonl": output_dir / "question3_recommendation_cards.jsonl",
     }
     next_tests.to_csv(paths["next_tests_csv"], index=False)
-    next_tests.to_parquet(paths["next_tests_parquet"], index=False)
+    paths["next_tests_parquet"] = write_dataframe(next_tests, paths["next_tests_parquet"], index=False)
     next_tests.head(100).to_csv(paths["priority_tests_csv"], index=False)
     _write_jsonl(paths["recommendation_cards_jsonl"], cards)
     return paths
@@ -783,9 +787,11 @@ def write_question3_outputs(
 def run_all_questions(
     cases_path: Path | str = CBR_CASES_PATH,
     memory_feature_set: str = "prelaunch_feature_cols",
+    cbr_backend: str = "engine",
+    force_rebuild_cbr: bool = False,
 ) -> dict[str, Any]:
     cases = load_cases(cases_path)
-    memory = CreativeMemory(cases_path=cases_path, feature_set_name=memory_feature_set).fit()
+    memory = build_memory(cases_path, memory_feature_set, cbr_backend, force_rebuild_cbr)
 
     ranking = build_winner_ranking(cases)
     q1_paths = write_question1_outputs(ranking, memory)
@@ -812,6 +818,7 @@ def run_all_questions(
     return {
         "cases_shape": list(cases.shape),
         "memory_feature_set": memory_feature_set,
+        "memory_backend": getattr(memory, "backend_name", cbr_backend),
         "memory_features": {
             "context_cols": memory.context_cols,
             "numeric_cols": memory.numeric_cols,
@@ -823,6 +830,25 @@ def run_all_questions(
         "question3": {key: str(value) for key, value in q3_paths.items()},
         "database": str(db_path),
     }
+
+
+def build_memory(
+    cases_path: Path | str,
+    memory_feature_set: str,
+    cbr_backend: str = "engine",
+    force_rebuild_cbr: bool = False,
+) -> Any:
+    if cbr_backend == "legacy":
+        return LegacyCreativeMemory(cases_path=cases_path, feature_set_name=memory_feature_set).fit()
+    if cbr_backend != "engine":
+        raise ValueError(f"Unsupported cbr_backend={cbr_backend!r}. Use 'engine' or 'legacy'.")
+    return CreativeMemoryEngineAdapter(
+        cases_path=cases_path,
+        feature_sets_path=CBR_FEATURE_SETS_PATH,
+        feature_set_name=memory_feature_set,
+        index_dir="outputs/cbr_index_app",
+        force_rebuild=force_rebuild_cbr,
+    ).fit()
 
 
 def _write_jsonl(path: Path, rows: list[dict[str, Any]]) -> None:

@@ -90,10 +90,10 @@ next_tests/outputs/question3_recommendation_cards.jsonl
 ## Ejecutar
 
 ```bash
-.venv/bin/python -m creative_intelligence.run_questions
+.venv/bin/python -m creative_intelligence.run_questions --cbr-backend engine
 ```
 
-Por defecto, el CBR usa `prelaunch_feature_cols`, que evita usar performance futura para calcular similitud.
+Por defecto, el CBR usa `cbr_engine` con `prelaunch_feature_cols`, que evita usar performance futura para calcular similitud. Si necesitas comparar contra el baseline anterior puedes ejecutar `--cbr-backend legacy`.
 
 La ejecucion tambien crea una base SQLite para la app:
 
@@ -147,3 +147,5 @@ Abre:
 ```text
 http://127.0.0.1:8000
 ```
+
+Si `dataset/final/creative_memory.db` falta o fue generado con el CBR antiguo, la app lo reconstruye automaticamente con `cbr_engine` al arrancar. El primer arranque puede tardar unos minutos; los siguientes reutilizan la DB y el indice persistido.

@@ -49,6 +49,37 @@ def db_connect() -> sqlite3.Connection:
     return conn
 
 
+def ensure_database_ready() -> None:
+    auto_build = os.getenv("APP_AUTO_BUILD_DB", "1").lower() not in {"0", "false", "no"}
+    if not auto_build:
+        return
+    desired_backend = os.getenv("APP_CBR_BACKEND", "engine")
+    needs_build = not DB_PATH.exists()
+    if not needs_build and desired_backend == "engine":
+        needs_build = _metadata_value("memory_backend") != "cbr_engine"
+    if not needs_build:
+        return
+    print("Building Creative Memory DB with cbr_engine. This runs once unless the DB is removed or downgraded.")
+    from creative_intelligence.paths import CBR_CASES_PATH
+    from creative_intelligence.questions import run_all_questions
+
+    run_all_questions(
+        cases_path=CBR_CASES_PATH,
+        memory_feature_set=os.getenv("APP_CBR_FEATURE_SET", "prelaunch_feature_cols"),
+        cbr_backend=desired_backend,
+        force_rebuild_cbr=os.getenv("APP_FORCE_REBUILD_CBR", "0").lower() in {"1", "true", "yes"},
+    )
+
+
+def _metadata_value(key: str) -> str | None:
+    try:
+        with db_connect() as conn:
+            row = conn.execute("SELECT value FROM metadata WHERE key = ?", [key]).fetchone()
+        return None if row is None else str(row["value"])
+    except Exception:
+        return None
+
+
 def clean_json(value: Any) -> Any:
     if isinstance(value, dict):
         return {str(k): clean_json(v) for k, v in value.items()}
@@ -956,6 +987,7 @@ def clamp_int(value: Any, minimum: int, maximum: int) -> int:
 
 def run() -> None:
     load_env()
+    ensure_database_ready()
     host = os.getenv("APP_HOST", "127.0.0.1")
     port = clamp_int(os.getenv("APP_PORT", "8000"), 1, 65535)
     state()
