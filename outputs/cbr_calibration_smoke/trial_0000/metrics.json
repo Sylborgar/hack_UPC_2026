@@ -1,0 +1,9 @@
+{
+  "neighbor_outcome_correlation_pearson_at_5": 0.5560468096740412,
+  "neighbor_outcome_correlation_spearman_at_5": 0.5399276591719074,
+  "top_k_label_consistency_at_5": 0.5924074074074074,
+  "hit_rate_top_performer_at_5": 0.021296296296296296,
+  "fatigue_retrieval_consistency_at_5": 0.7501851851851852,
+  "ndcg_at_5": 0.7672248251246098,
+  "self_neighbor_violations": 0
+}
