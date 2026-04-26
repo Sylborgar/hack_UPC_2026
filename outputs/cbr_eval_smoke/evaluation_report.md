@@ -1,0 +1,9 @@
+# CBR Retrieval Evaluation
+
+- neighbor_outcome_correlation_pearson_at_5: 0.5494481742541336
+- neighbor_outcome_correlation_spearman_at_5: 0.5304397294193764
+- top_k_label_consistency_at_5: 0.5907407407407408
+- hit_rate_top_performer_at_5: 0.018518518518518517
+- fatigue_retrieval_consistency_at_5: 0.7490740740740741
+- ndcg_at_5: 0.7710062913843533
+- self_neighbor_violations: 0

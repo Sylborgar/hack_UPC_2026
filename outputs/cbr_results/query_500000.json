@@ -1,0 +1,443 @@
+{
+  "query_creative_id": "500000",
+  "config": {
+    "mode": "prelaunch",
+    "feature_set_name": "prelaunch_feature_cols",
+    "weights": {
+      "clip": 0.45,
+      "cnn": 0.25,
+      "visual_numeric": 0.2,
+      "text_numeric": 0.05,
+      "categorical_context": 0.05
+    }
+  },
+  "filters_applied": {
+    "same_vertical": true,
+    "same_format": true,
+    "same_language": false,
+    "exclude_same_campaign": false
+  },
+  "k_requested": 5,
+  "overfetch": 50,
+  "discarded_by_filter": [
+    {
+      "candidate_id": 500651,
+      "reason": "same_format"
+    },
+    {
+      "candidate_id": 500612,
+      "reason": "same_format"
+    },
+    {
+      "candidate_id": 500905,
+      "reason": "same_format"
+    },
+    {
+      "candidate_id": 500505,
+      "reason": "same_format"
+    },
+    {
+      "candidate_id": 500472,
+      "reason": "same_format"
+    },
+    {
+      "candidate_id": 500615,
+      "reason": "same_format"
+    },
+    {
+      "candidate_id": 500004,
+      "reason": "same_format"
+    },
+    {
+      "candidate_id": 500074,
+      "reason": "same_format"
+    },
+    {
+      "candidate_id": 500938,
+      "reason": "same_format"
+    },
+    {
+      "candidate_id": 500256,
+      "reason": "same_format"
+    },
+    {
+      "candidate_id": 500723,
+      "reason": "same_format"
+    },
+    {
+      "candidate_id": 500759,
+      "reason": "same_format"
+    },
+    {
+      "candidate_id": 500291,
+      "reason": "same_format"
+    },
+    {
+      "candidate_id": 500901,
+      "reason": "same_format"
+    },
+    {
+      "candidate_id": 500036,
+      "reason": "same_format"
+    },
+    {
+      "candidate_id": 500108,
+      "reason": "same_format"
+    },
+    {
+      "candidate_id": 500041,
+      "reason": "same_format"
+    },
+    {
+      "candidate_id": 500794,
+      "reason": "same_format"
+    },
+    {
+      "candidate_id": 500435,
+      "reason": "same_format"
+    },
+    {
+      "candidate_id": 500216,
+      "reason": "same_format"
+    },
+    {
+      "candidate_id": 500685,
+      "reason": "same_format"
+    },
+    {
+      "candidate_id": 500254,
+      "reason": "same_format"
+    }
+  ],
+  "warnings": [],
+  "neighbors_final": [
+    {
+      "query_creative_id": "500000",
+      "neighbor_creative_id": 500003,
+      "rank": 1,
+      "creative_id": 500003,
+      "campaign_id": 20000,
+      "advertiser_id": 1000,
+      "advertiser_name": "PixelForge",
+      "app_name": "PixelForge Legends",
+      "vertical": "gaming",
+      "format": "interstitial",
+      "language": "en",
+      "theme": "testimonial",
+      "hook_type": "free shipping",
+      "cta_text": "Order now",
+      "headline": "Level up today",
+      "subhead": "No ads in first week",
+      "creative_status": "stable",
+      "fatigue_day": NaN,
+      "has_fatigue": 0,
+      "perf_score": 0.4916666666666667,
+      "overall_ctr": 0.0054818306750161,
+      "overall_cvr": 0.1891360381861575,
+      "overall_ipm": 1.0368117358799032,
+      "overall_roas": 0.9491882669871504,
+      "ctr_decay_pct": -0.8583884136533985,
+      "cvr_decay_pct": -0.0872846037719718,
+      "peak_rolling_ctr_5": 0.0139213687319307,
+      "lifecycle_spend_usd": 58977.52,
+      "lifecycle_impressions": 9554290,
+      "lifecycle_clicks": 52375,
+      "lifecycle_conversions": 9906,
+      "lifecycle_revenue_usd": 55980.77,
+      "lifecycle_ctr": 0.0054818306750161,
+      "lifecycle_cvr": 0.1891360381861575,
+      "lifecycle_ipm": 1.0368117358799032,
+      "lifecycle_roas": 0.9491882669871504,
+      "__row_pos": 3,
+      "missing_row_ratio": 0.0,
+      "global_similarity": 0.5470080375671387,
+      "similarity_categorical_context": 0.5882353186607361,
+      "similarity_clip": 0.6067604422569275,
+      "similarity_cnn": 0.34915971755981445,
+      "similarity_text_numeric": 0.5062995553016663,
+      "similarity_visual_numeric": 0.6597456932067871,
+      "matched_filters": [],
+      "block_agreement_score": 0.4833306384471164,
+      "context_match_score": 0.6666666666666666,
+      "data_quality_score": 1.0,
+      "final_score": 0.5720718887307312,
+      "reason_codes": [
+        "SAME_VERTICAL",
+        "SAME_FORMAT",
+        "POSSIBLE_CAMPAIGN_DUPLICATE"
+      ]
+    },
+    {
+      "query_creative_id": "500000",
+      "neighbor_creative_id": 500613,
+      "rank": 2,
+      "creative_id": 500613,
+      "campaign_id": 20102,
+      "advertiser_id": 1030,
+      "advertiser_name": "IronQuest",
+      "app_name": "IronQuest Arena",
+      "vertical": "gaming",
+      "format": "interstitial",
+      "language": "en",
+      "theme": "competitive",
+      "hook_type": "challenge",
+      "cta_text": "Watch now",
+      "headline": "Win epic rewards",
+      "subhead": "Play with friends tonight",
+      "creative_status": "fatigued",
+      "fatigue_day": 13.0,
+      "has_fatigue": 1,
+      "perf_score": 0.6083333333333333,
+      "overall_ctr": 0.0069757236089494,
+      "overall_cvr": 0.1830496799931119,
+      "overall_ipm": 1.2769039743385946,
+      "overall_roas": 1.1986383338830635,
+      "ctr_decay_pct": -0.870506379163156,
+      "cvr_decay_pct": -0.1266788275986534,
+      "peak_rolling_ctr_5": 0.0148874060128885,
+      "lifecycle_spend_usd": 30014.7,
+      "lifecycle_impressions": 4994894,
+      "lifecycle_clicks": 34843,
+      "lifecycle_conversions": 6378,
+      "lifecycle_revenue_usd": 35976.77,
+      "lifecycle_ctr": 0.0069757236089494,
+      "lifecycle_cvr": 0.1830496799931119,
+      "lifecycle_ipm": 1.2769039743385946,
+      "lifecycle_roas": 1.1986383338830635,
+      "__row_pos": 613,
+      "missing_row_ratio": 0.0,
+      "global_similarity": 0.5310271978378296,
+      "similarity_categorical_context": 0.6470588445663452,
+      "similarity_clip": 0.3681594133377075,
+      "similarity_cnn": 0.8468323349952698,
+      "similarity_text_numeric": 0.4193357527256012,
+      "similarity_visual_numeric": 0.5016383528709412,
+      "matched_filters": [],
+      "block_agreement_score": 0.46026573407921645,
+      "context_match_score": 0.6666666666666666,
+      "data_quality_score": 1.0,
+      "final_score": 0.5574255652650298,
+      "reason_codes": [
+        "HIGH_CNN_SIMILARITY",
+        "SAME_VERTICAL",
+        "SAME_FORMAT"
+      ]
+    },
+    {
+      "query_creative_id": "500000",
+      "neighbor_creative_id": 500072,
+      "rank": 3,
+      "creative_id": 500072,
+      "campaign_id": 20012,
+      "advertiser_id": 1012,
+      "advertiser_name": "VoxelRealm",
+      "app_name": "VoxelRealm Battle",
+      "vertical": "gaming",
+      "format": "interstitial",
+      "language": "fr",
+      "theme": "gameplay",
+      "hook_type": "challenge",
+      "cta_text": "Get offer",
+      "headline": "Level up today",
+      "subhead": "Play with friends tonight",
+      "creative_status": "stable",
+      "fatigue_day": NaN,
+      "has_fatigue": 0,
+      "perf_score": 0.5530864197530864,
+      "overall_ctr": 0.0061479348560741,
+      "overall_cvr": 0.1908978645221529,
+      "overall_ipm": 1.1736276352458637,
+      "overall_roas": 1.0806670939235414,
+      "ctr_decay_pct": -0.864961728403803,
+      "cvr_decay_pct": -0.0814129887565027,
+      "peak_rolling_ctr_5": 0.0137067659854594,
+      "lifecycle_spend_usd": 32798.38,
+      "lifecycle_impressions": 5400350,
+      "lifecycle_clicks": 33201,
+      "lifecycle_conversions": 6338,
+      "lifecycle_revenue_usd": 35444.13,
+      "lifecycle_ctr": 0.0061479348560741,
+      "lifecycle_cvr": 0.1908978645221529,
+      "lifecycle_ipm": 1.1736276352458637,
+      "lifecycle_roas": 1.0806670939235414,
+      "__row_pos": 72,
+      "missing_row_ratio": 0.0,
+      "global_similarity": 0.5518027544021606,
+      "similarity_categorical_context": 0.29411768913269043,
+      "similarity_clip": 0.8512957096099854,
+      "similarity_cnn": 0.129100501537323,
+      "similarity_text_numeric": 0.7009862065315247,
+      "similarity_visual_numeric": 0.43344646692276,
+      "matched_filters": [],
+      "block_agreement_score": 0.3549534260414163,
+      "context_match_score": 0.6666666666666666,
+      "data_quality_score": 1.0,
+      "final_score": 0.5561716086543916,
+      "reason_codes": [
+        "HIGH_CLIP_SIMILARITY",
+        "SAME_VERTICAL",
+        "SAME_FORMAT"
+      ]
+    },
+    {
+      "query_creative_id": "500000",
+      "neighbor_creative_id": 500144,
+      "rank": 4,
+      "creative_id": 500144,
+      "campaign_id": 20024,
+      "advertiser_id": 1024,
+      "advertiser_name": "GlitchWave",
+      "app_name": "GlitchWave Quest",
+      "vertical": "gaming",
+      "format": "interstitial",
+      "language": "pt",
+      "theme": "fantasy",
+      "hook_type": "power-up",
+      "cta_text": "Claim reward",
+      "headline": "Beat your rivals",
+      "subhead": "Play with friends tonight",
+      "creative_status": "stable",
+      "fatigue_day": NaN,
+      "has_fatigue": 0,
+      "perf_score": 0.5317901234567901,
+      "overall_ctr": 0.0055831473748596,
+      "overall_cvr": 0.1739367282705189,
+      "overall_ipm": 0.971114387835218,
+      "overall_roas": 1.3586099464292778,
+      "ctr_decay_pct": -0.8210815163331886,
+      "cvr_decay_pct": -0.0715223118122488,
+      "peak_rolling_ctr_5": 0.0121710904716891,
+      "lifecycle_spend_usd": 35903.94,
+      "lifecycle_impressions": 8877430,
+      "lifecycle_clicks": 49564,
+      "lifecycle_conversions": 8621,
+      "lifecycle_revenue_usd": 48779.45,
+      "lifecycle_ctr": 0.0055831473748596,
+      "lifecycle_cvr": 0.1739367282705189,
+      "lifecycle_ipm": 0.971114387835218,
+      "lifecycle_roas": 1.3586099464292776,
+      "__row_pos": 144,
+      "missing_row_ratio": 0.0,
+      "global_similarity": 0.5071293711662292,
+      "similarity_categorical_context": 0.529411792755127,
+      "similarity_clip": 0.5344699621200562,
+      "similarity_cnn": 0.5059770345687866,
+      "similarity_text_numeric": 0.365065336227417,
+      "similarity_visual_numeric": 0.4769986867904663,
+      "matched_filters": [],
+      "block_agreement_score": 0.4524348417878065,
+      "context_match_score": 0.6666666666666666,
+      "data_quality_score": 1.0,
+      "final_score": 0.5395224527511981,
+      "reason_codes": [
+        "SAME_VERTICAL",
+        "SAME_FORMAT"
+      ]
+    },
+    {
+      "query_creative_id": "500000",
+      "neighbor_creative_id": 500792,
+      "rank": 5,
+      "creative_id": 500792,
+      "campaign_id": 20132,
+      "advertiser_id": 1024,
+      "advertiser_name": "GlitchWave",
+      "app_name": "GlitchWave Rush",
+      "vertical": "gaming",
+      "format": "interstitial",
+      "language": "de",
+      "theme": "reward",
+      "hook_type": "new collection",
+      "cta_text": "Get offer",
+      "headline": "Level up today",
+      "subhead": "Free rewards for new players",
+      "creative_status": "stable",
+      "fatigue_day": NaN,
+      "has_fatigue": 0,
+      "perf_score": 0.7287037037037036,
+      "overall_ctr": 0.0093316988911037,
+      "overall_cvr": 0.1829152690681056,
+      "overall_ipm": 1.706910213528786,
+      "overall_roas": 1.7266071740129405,
+      "ctr_decay_pct": -0.658419783635414,
+      "cvr_decay_pct": 0.0261961304099704,
+      "peak_rolling_ctr_5": 0.0150307574873153,
+      "lifecycle_spend_usd": 16277.64,
+      "lifecycle_impressions": 2939229,
+      "lifecycle_clicks": 27428,
+      "lifecycle_conversions": 5017,
+      "lifecycle_revenue_usd": 28105.09,
+      "lifecycle_ctr": 0.0093316988911037,
+      "lifecycle_cvr": 0.1829152690681056,
+      "lifecycle_ipm": 1.706910213528786,
+      "lifecycle_roas": 1.7266071740129405,
+      "__row_pos": 792,
+      "missing_row_ratio": 0.0,
+      "global_similarity": 0.49607452750205994,
+      "similarity_categorical_context": 0.4117647409439087,
+      "similarity_clip": 0.4605485200881958,
+      "similarity_cnn": 0.5082051753997803,
+      "similarity_text_numeric": 0.6898505091667175,
+      "similarity_visual_numeric": 0.5334779620170593,
+      "matched_filters": [],
+      "block_agreement_score": 0.47168628917352956,
+      "context_match_score": 0.6666666666666666,
+      "data_quality_score": 1.0,
+      "final_score": 0.534671779294138,
+      "reason_codes": [
+        "SAME_VERTICAL",
+        "SAME_FORMAT"
+      ]
+    }
+  ],
+  "reuse_summary": {
+    "neighbor_count": 5,
+    "avg_similarity": 0.5266083478927612,
+    "avg_final_score": 0.5519726589390979,
+    "median_perf_score": 0.5530864197530864,
+    "mean_perf_score": 0.582716049382716,
+    "median_roas": 1.1986383338830635,
+    "median_ipm": 1.1736276352458637,
+    "median_ctr": 0.0061479348560741,
+    "median_cvr": 0.1830496799931119,
+    "top_performer_ratio": 0.0,
+    "fatigued_ratio": 0.2,
+    "stable_ratio": 0.8,
+    "weighted_perf_score": 0.5813730757264193,
+    "weighted_roas": 1.2567146491220376,
+    "weighted_ipm": 1.229851812391277,
+    "confidence_score": 0.45635145740760164
+  },
+  "recommendation": {
+    "action": "PIVOT",
+    "confidence": 0.45635145740760164,
+    "summary": "PIVOT con confianza 0.46",
+    "reasons": [
+      "La similitud es razonable pero los outcomes historicos son mixtos o bajos."
+    ],
+    "risks": [],
+    "suggested_next_steps": [
+      "Cambiar hook, layout o propuesta visual antes de invertir mas."
+    ]
+  },
+  "explanation": {
+    "marketer_explanation": "Esta creatividad se parece a 5 casos historicos. La similitud media es 0.53. La similitud viene sobre todo de clip, text_numeric, visual_numeric. Los vecinos tuvieron ROAS mediano 1.1986383338830635 e IPM mediano 1.1736276352458637. El 0% fueron top performers. Recomendacion: PIVOT con confianza 0.46.",
+    "technical_explanation": "Top bloques por similitud media: [{'block': 'clip', 'mean_similarity': 0.5642}, {'block': 'text_numeric', 'mean_similarity': 0.5363}, {'block': 'visual_numeric', 'mean_similarity': 0.5211}]. Patrones diferenciales detectados: []. Warnings: [].",
+    "top_similarity_drivers": [
+      {
+        "block": "clip",
+        "mean_similarity": 0.5642
+      },
+      {
+        "block": "text_numeric",
+        "mean_similarity": 0.5363
+      },
+      {
+        "block": "visual_numeric",
+        "mean_similarity": 0.5211
+      }
+    ],
+    "top_performance_patterns": [],
+    "warnings": []
+  }
+}

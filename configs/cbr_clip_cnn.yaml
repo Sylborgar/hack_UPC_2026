@@ -1,0 +1,20 @@
+mode: prelaunch
+feature_set_name: prelaunch_feature_cols
+metadata_columns: [creative_id, campaign_id, advertiser_id, advertiser_name, app_name, vertical, format, language, theme, hook_type, cta_text, headline, subhead]
+outcome_columns: [creative_status, fatigue_day, has_fatigue, perf_score, overall_ctr, overall_cvr, overall_ipm, overall_roas, ctr_decay_pct, cvr_decay_pct, peak_rolling_ctr_5, lifecycle_spend_usd, lifecycle_impressions, lifecycle_clicks, lifecycle_conversions, lifecycle_revenue_usd, lifecycle_ctr, lifecycle_cvr, lifecycle_ipm, lifecycle_roas]
+forbidden_feature_prefixes_by_mode: {prelaunch: [first_3d_, first_7d_, first_14d_, lifecycle_, overall_], early_3d: [first_7d_, first_14d_, lifecycle_, overall_], early_7d: [first_14d_, lifecycle_, overall_], early_14d: [lifecycle_, overall_]}
+embedding_blocks:
+  clip: {enabled: true, prefixes: [clip_pca_], weight: 0.65}
+  cnn: {enabled: true, prefixes: [cnn_pca_], weight: 0.35}
+numeric_blocks:
+  visual_numeric: {enabled: false, prefixes: [vis_, cv_, prompt_], exclude_prefixes: [clip_pca_, cnn_pca_], weight: 0.0}
+  text_numeric: {enabled: false, prefixes: [txtsel_], weight: 0.0}
+  business_early: {enabled: false, prefixes: [first_3d_, first_7d_, first_14d_], weight: 0.0}
+categorical_blocks:
+  categorical_context: {enabled: false, columns: [], weight: 0.0}
+index: {backend: faiss, faiss_index_type: flat_ip, metric: cosine, overfetch_multiplier: 10}
+retrieval: {k: 10, min_similarity: 0.0, exclude_self: true, exclude_same_campaign_default: false, filters: {same_vertical: false, same_format: false, same_language: false}}
+missing_values: {numeric_strategy: median, categorical_strategy: "__missing__", max_missing_ratio_per_column: 0.8, max_missing_ratio_per_row: 0.7}
+calibration: {enabled: true, method: random_search, n_trials: 80, cv_strategy: temporal, n_splits: 4, objective: neighbor_outcome_correlation, k_values: [5, 10, 20], group_column: campaign_id, random_state: 42}
+outputs: {index_dir: outputs/cbr_index, reports_dir: outputs/cbr_reports, calibration_dir: outputs/cbr_calibration}
+scoring: {alpha: 0.70, beta: 0.15, gamma: 0.10, delta: 0.05}
