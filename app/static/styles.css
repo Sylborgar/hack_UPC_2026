@@ -320,6 +320,14 @@ h2 {
   margin-top: 8px;
 }
 
+.detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+  margin-bottom: 16px;
+}
+
 .badge {
   display: inline-flex;
   align-items: center;
@@ -770,6 +778,74 @@ h2 {
   line-height: 1;
 }
 
+.explain-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 110;
+  display: grid;
+  place-items: center;
+  padding: 28px;
+}
+
+.explain-modal.hidden {
+  display: none;
+}
+
+.explain-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 0;
+  background: rgba(12, 18, 28, 0.66);
+  cursor: zoom-out;
+}
+
+.explain-modal-backdrop:hover {
+  transform: none;
+}
+
+.explain-modal-dialog {
+  position: relative;
+  width: min(760px, 94vw);
+  max-height: 88vh;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.32);
+  overflow: hidden;
+}
+
+.explain-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--line);
+  background: #f8fafc;
+}
+
+.explain-modal-header h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.explain-modal-body {
+  padding: 20px 22px;
+  overflow: auto;
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.explain-modal-body.loading {
+  color: var(--muted);
+}
+
 @media (max-width: 960px) {
   .topbar {
     grid-template-columns: 1fr;
@@ -808,5 +884,13 @@ h2 {
   .image-modal-stage {
     min-height: 300px;
     padding: 14px;
+  }
+
+  .explain-modal {
+    padding: 14px;
+  }
+
+  .explain-modal-body {
+    padding: 16px;
   }
 }

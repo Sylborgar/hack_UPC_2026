@@ -6,6 +6,7 @@ const state = {
   mapNeighbors: new Set(),
   mapPointById: new Map(),
   mapSearchSeq: 0,
+  explainSeq: 0,
   map: {
     scale: 1,
     offsetX: 0,
@@ -70,6 +71,14 @@ function bindImageModal() {
   });
 }
 
+function bindExplainModal() {
+  $("explainModalClose").addEventListener("click", closeExplainModal);
+  $("explainModalBackdrop").addEventListener("click", closeExplainModal);
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeExplainModal();
+  });
+}
+
 function openImageModal(url, title) {
   if (!url) return;
   $("imageModalTitle").textContent = title || "Creative detail";
@@ -88,6 +97,51 @@ function closeImageModal() {
   document.body.classList.remove("modal-open");
 }
 
+function bindExplainButtons(panel) {
+  panel.querySelectorAll("[data-explain-creative]").forEach((button) => {
+    button.addEventListener("click", () => {
+      openExplainModal(
+        Number(button.dataset.explainId),
+        button.dataset.explainFocus || "all",
+        button.dataset.explainTitle || `Creative ${button.dataset.explainId}`
+      );
+    });
+  });
+}
+
+async function openExplainModal(creativeId, focus = "all", title = "") {
+  if (!creativeId) return;
+  const seq = ++state.explainSeq;
+  $("explainModalTitle").textContent = `Explain · ${title || `Creative ${creativeId}`}`;
+  $("explainModalBody").classList.add("loading");
+  $("explainModalBody").textContent = "Generating explanation...";
+  $("explainModal").classList.remove("hidden");
+  $("explainModal").setAttribute("aria-hidden", "false");
+  document.body.classList.add("modal-open");
+  try {
+    const data = await api("/api/explain", {
+      method: "POST",
+      body: JSON.stringify({ creative_id: creativeId, focus }),
+    });
+    if (seq !== state.explainSeq) return;
+    $("explainModalBody").classList.remove("loading");
+    $("explainModalBody").innerHTML = `${data.ok ? "" : `<p class="meta-line">Fallback local: ${esc(data.error || "Groq unavailable")}</p>`}${formatText(data.text || "")}`;
+  } catch (err) {
+    if (seq !== state.explainSeq) return;
+    $("explainModalBody").classList.remove("loading");
+    $("explainModalBody").innerHTML = `<p class="meta-line">No se pudo generar la explicación.</p><p>${esc(err.message || err)}</p>`;
+  }
+}
+
+function closeExplainModal() {
+  const modal = $("explainModal");
+  if (!modal || modal.classList.contains("hidden")) return;
+  modal.classList.add("hidden");
+  modal.setAttribute("aria-hidden", "true");
+  $("explainModalBody").textContent = "";
+  document.body.classList.remove("modal-open");
+}
+
 async function api(path, options = {}) {
   const res = await fetch(path, {
     headers: { "Content-Type": "application/json" },
@@ -103,6 +157,7 @@ async function init() {
   bindControls();
   bindMapControls();
   bindImageModal();
+  bindExplainModal();
   await loadOptions();
   await loadList("home");
   await runBriefMatch(false);
@@ -255,6 +310,15 @@ function renderHomeDetail(panel, detail) {
           <span class="badge">${esc(c.hook_type)}</span>
           <span class="badge">${esc(c.cta_text)}</span>
         </div>
+        <div class="detail-actions">
+          <button
+            class="primary-btn"
+            data-explain-creative
+            data-explain-id="${esc(c.creative_id)}"
+            data-explain-focus="all"
+            data-explain-title="${esc(c.headline || c.app_name || `Creative ${c.creative_id}`)}"
+          >Explain</button>
+        </div>
         ${featureSection("Performance", [
           ["Perf score", c.perf_score],
           ["Best score", q1.best_score],
@@ -296,6 +360,7 @@ function renderHomeDetail(panel, detail) {
     </div>
   `;
   bindImageToggle(panel);
+  bindExplainButtons(panel);
 }
 
 function featureSection(title, rows) {
@@ -695,6 +760,15 @@ function renderMapDetail(detail) {
       <span class="badge">score ${fmt(q1.best_score)}</span>
       <span class="badge">risk ${fmt(q2.creative_health_risk)}</span>
     </div>
+    <div class="detail-actions">
+      <button
+        class="primary-btn full-btn"
+        data-explain-creative
+        data-explain-id="${esc(c.creative_id)}"
+        data-explain-focus="all"
+        data-explain-title="${esc(c.headline || c.app_name || `Creative ${c.creative_id}`)}"
+      >Explain</button>
+    </div>
     <div class="evidence-box">
       <strong>Next test</strong>
       <p>${esc(q3.next_test || "No recommendation")}</p>
@@ -706,6 +780,7 @@ function renderMapDetail(detail) {
     <button class="primary-btn full-btn" id="openMapCaseBtn">Open in Home</button>
   `;
   bindImageToggle($("mapDetail"));
+  bindExplainButtons($("mapDetail"));
   $("openMapCaseBtn").addEventListener("click", () => openHomeCase(Number(c.creative_id)));
   $("mapDetail").querySelectorAll("[data-neighbor-id]").forEach((button) => {
     button.addEventListener("click", () => selectMapCase(Number(button.dataset.neighborId), { center: true, ensureVisible: true }));
